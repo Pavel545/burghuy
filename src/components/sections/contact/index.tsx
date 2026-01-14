@@ -18,7 +18,7 @@ export default function Contact() {
           </a>
           <div className="contact_lineInfo flex justify-between mb-6 mt-6">
             <p className="">АДРЕС</p>
-            <a href="">г. Ульяновск, Пушкинская 4а</a>
+            <a target="_blank" href="https://yandex.ru/maps/-/CLdTyWYe">г. Ульяновск, Пушкинская 4а</a>
           </div>
           <div className="contact_lineInfo flex justify-between">
             <p>ВРЕМЯ РАБОТЫ</p>
@@ -31,14 +31,14 @@ export default function Contact() {
         <div className="contact_loc">
           <Image src={"/img/logo.png"} alt="Telegramm" width={200} height={100} />
 
-          <button className="butT1 mt-20">
+          <a href="https://yandex.ru/maps/-/CLdTyWYe" className="butT1 mt-20">
             мы на карте 
-          </button>
+          </a>
         </div>
       </div>
       <div className="container">
         <div className="contact_contact  flex justify-end gap-3 ">
-          <a className="contact_contact_link" href="https://t.me/test5252525252Bot">
+          <a className="contact_contact_link" target="_blank" href="https://t.me/test5252525252Bot">
             <Image
               src={"/icons/tg.svg"}
               alt="Telegramm"
@@ -46,7 +46,7 @@ export default function Contact() {
               height={80}
             />
           </a>
-          <a className="contact_contact_link" href="">
+          <a className="contact_contact_link" target="_blank" href="">
             <Image
               src={"/icons/watsapp.svg"}
               alt="Telegramm"
@@ -54,7 +54,7 @@ export default function Contact() {
               height={80}
             />
           </a>
-          <a className="contact_contact_link" href="https://vk.com/club235327813">
+          <a className="contact_contact_link" target="_blank" href="https://vk.com/club235327813">
             <Image
               src={"/icons/vk.svg"}
               alt="Telegramm"

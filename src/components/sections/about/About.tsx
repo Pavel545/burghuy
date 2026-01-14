@@ -33,7 +33,7 @@ export default function About() {
 
               <a
                 className="about_mapGo"
-                href="http://"
+                href="https://yandex.ru/maps/-/CLdTyWYe"
                 target="_blank"
                 rel="noopener noreferrer"
               >

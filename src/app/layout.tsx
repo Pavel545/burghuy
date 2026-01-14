@@ -137,9 +137,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru"> {/* Изменил на русский язык */}
+    <html lang="ru">
       <head>
-        {/* Дополнительные метатеги */}
         <meta name="copyright" content="Буржуй" />
         <meta name="robots" content="all" />
       </head>

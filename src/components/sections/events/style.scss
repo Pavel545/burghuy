@@ -1,97 +1,189 @@
 .events {
+  &_grid {
+    margin: 40px 0 0;
 
+    display: grid;
+    gap: 18px;
 
-    &_content {
-        margin: 40px 0;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "a a b b c c"
+      "d d d e e e";
 
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 50px;
+    /* БЛОКИ ВЫШЕ */
+    grid-auto-rows: 290px;
+  }
 
-        .item {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            gap: 15px;
+  &_card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
 
-            &_img {
-                width: 100%;
-                height: 320px;
-            }
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.2);
 
-            img {
-                width: 100%;
-                height: 100%;
-                border-radius: 5px;
-                object-fit: cover;
-            }
+    transition: transform 0.25s ease, border-color 0.25s ease;
 
-            .title {
-                color: #fff;
-                font-size: 38px;
-            }
-
-            .butT1 {
-                margin-top: 90px;
-
-            }
-        }
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
     }
+  }
 
+  .area-a { grid-area: a; }
+  .area-b { grid-area: b; }
+  .area-c { grid-area: c; }
+  .area-d { grid-area: d; }
+  .area-e { grid-area: e; }
 
+  &_media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      /* ОБЕСЦВЕЧЕНО + ЧУТЬ ТЕМНЕЕ */
+      filter: grayscale(1) saturate(0.2) brightness(0.75) contrast(1.05);
+      transition: filter 0.35s ease, transform 0.35s ease;
+      transform: scale(1.02);
+    }
+  }
+
+  /* На hover возвращаем цвет */
+  &_card:hover &_media img {
+    filter: none;
+    transform: scale(1.03);
+  }
+
+  &_overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.10) 0%,
+      rgba(0, 0, 0, 0.55) 60%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+  }
+
+  &_info {
+    position: absolute;
+    inset: 0;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  &_title {
+    color: #fff;
+    font-size: 26px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  /* КНОПКА ВИДНА ВСЕГДА */
+  &_btn {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+
+    width: max-content;
+    max-width: 100%;
+    padding: 12px 18px;
+
+    font-size: 16px;
+    border-radius: 28px;
+  }
 }
 
+/* ============ TABLET (до 1024px) ============ */
+@media (max-width: 1024px) {
+  .events {
+    &_grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "a b"
+        "c d"
+        "e e";
 
+      /* выше и на планшете */
+      grid-auto-rows: 280px;
 
-/* ====== EVENTS mobile 375x667 ====== */
-@media (max-width: 420px) {
-    .events {
-        padding: 55px 0;
-        /* вместо .sect 90px */
-
-        .h2 {
-            margin-left: 0;
-            padding: 8px 16px;
-            font-size: 16px;
-            border-radius: 28px;
-        }
-
-        &_content {
-            margin: 20px 0;
-
-            grid-template-columns: 1fr;
-            gap: 60px;
-        }
-
-        .item {
-            gap: 10px;
-            // padding: 12px;
-            // border: 1px solid rgba(255, 255, 255, 0.15);
-            // border-radius: 16px;
-
-            &_img {
-                height: 180px;
-                /* было 320 */
-            }
-
-            img {
-                border-radius: 10px;
-            }
-
-            .title {
-                font-size: 22px;
-                /* было 38 */
-                line-height: 120%;
-            }
-
-            .butT1 {
-                margin-top: 8px;
-                /* было 90 */
-                width: 100%;
-                padding: 12px 16px;
-                font-size: 16px;
-                border-radius: 28px;
-            }
-        }
+      gap: 14px;
+      margin-top: 24px;
     }
+
+    &_title {
+      font-size: 22px;
+    }
+
+    &_btn {
+      width: 100%;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 15px;
+    }
+  }
+}
+
+/* ============ MOBILE (до 420px / 375x667) ============ */
+@media (max-width: 420px) {
+  .events {
+    padding: 55px 0;
+
+    .h2 {
+      margin-left: 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 28px;
+    }
+
+    &_grid {
+      margin-top: 18px;
+
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "d"
+        "e";
+
+      /* БЛОКИ ВЫШЕ НА МОБИЛКЕ */
+      grid-auto-rows: 220px;
+      gap: 14px;
+    }
+
+    &_info {
+      padding: 14px;
+      gap: 10px;
+    }
+
+    &_title {
+      font-size: 18px;
+      letter-spacing: 0.4px;
+    }
+
+    &_btn {
+      width: 100%;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 15px;
+      border-radius: 28px;
+    }
+
+    /* На мобилке hover нет — оставим не “в ноль” серым, чтобы было живее */
+    &_media img {
+      filter: grayscale(0.7) saturate(0.35) brightness(0.8) contrast(1.05);
+      transform: scale(1.02);
+    }
+  }
 }
