@@ -1,0 +1,29 @@
+.footer {
+
+    .container {
+        padding: 30px 0;
+
+        display: flex;
+        justify-items: stretch;
+        align-items: end;
+        justify-content: space-between;
+
+
+        @media (max-width: 420px) {
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &_avtor {
+        font-size: 24px;
+
+        text-align: end;
+
+        @media (max-width: 420px) {
+            text-align: center;
+        }
+    }
+}

@@ -98,3 +98,119 @@
         }
     }
 }
+
+
+/* ====== HERO mobile 375x667 ====== */
+@media (max-width: 420px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 20px;
+
+    background-position: center;
+
+    &_head {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "logo logo"
+        "loka tel";
+      gap: 12px;
+      padding-top: 12px;
+    }
+
+    .logo {
+      grid-area: logo;
+      justify-self: center;
+      top: 0;
+
+      img {
+        width: 170px !important;
+        height: auto !important;
+      }
+    }
+
+    .loka_box {
+      grid-area: loka;
+      gap: 10px;
+
+      span {
+        font-size: 13px;
+        line-height: 120%;
+      }
+    }
+
+    .loka {
+      width: 38px !important;
+      height: 38px !important;
+    }
+
+    .tel {
+      grid-area: tel;
+      justify-self: end;
+      gap: 8px;
+
+      img {
+        width: 34px !important;
+        height: 34px !important;
+      }
+
+      span {
+        font-size: 16px;
+        white-space: nowrap;
+      }
+    }
+
+    &_content {
+      margin-top: 22px;
+      flex-direction: column;
+      gap: 18px;
+
+      .h1 {
+        font-size: 34px;
+        line-height: 112%;
+        letter-spacing: 0.2px;
+      }
+
+      &_ps {
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 0;
+        letter-spacing: 0.2px;
+      }
+
+      /* блок с кнопками (у тебя сейчас: flex gap-14 mb-50 mt-27) */
+      > div .flex {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 16px;
+        margin-bottom: 0;
+      }
+
+      /* контакты справа -> вниз в ряд */
+      &_contact {
+        margin-left: 0;
+        padding: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+
+        &_link {
+          padding: 6px;
+
+          img {
+            width: 42px !important;
+            height: 42px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .hero_actions {
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+}

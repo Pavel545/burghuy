@@ -54,3 +54,78 @@
         }
     }
 }
+
+
+/* ====== MENU mobile 375x667 ====== */
+@media (max-width: 420px) {
+  .menu {
+    padding: 55px 0; /* вместо .sect 90px */
+
+    .h2 {
+      margin-left: 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 28px;
+    }
+
+    &_content {
+      grid-template-columns: 1fr;
+      padding: 20px 0;
+      gap: 18px;
+
+      .item {
+        &_gallary {
+          padding: 12px 0;
+          gap: 10px;
+
+          height: auto;       /* убираем 730px */
+          max-height: none;
+
+          border-bottom-width: 1px;
+
+          /* общий “контейнер” под картинки */
+          & > div {
+            height: 100%;
+          }
+
+          img {
+            border-radius: 5px;
+          }
+
+          &.i-1 {
+            /* 2x2, но компактно */
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 260px;
+          }
+
+          &.i-2 {
+            /* 3 картинки в ряд, чтобы не было огромной высоты */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+            height: 120px;
+
+            & > div {
+              height: 120px;
+            }
+          }
+
+          &.i-3 {
+            /* 1 картинка — сделаем как баннер */
+            grid-template-columns: 1fr;
+            height: 220px;
+
+            & > div {
+              height: 220px;
+            }
+          }
+        }
+
+        .h3 {
+          font-size: 20px;
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+}

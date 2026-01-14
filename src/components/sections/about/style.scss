@@ -116,3 +116,81 @@
   filter: saturate(0.8) brightness(0.85);
   transform: scale(0.96);
 }
+
+
+
+/* ====== ABOUT mobile 375x667 ====== */
+@media (max-width: 420px) {
+  .about {
+    padding: 55px 0; /* вместо .sect 90px */
+
+    .h2 {
+      margin-left: 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 28px;
+    }
+
+    &_content {
+      grid-template-columns: 1fr;
+      margin: 20px 0;
+      gap: 18px;
+
+      &_left {
+        gap: 14px;
+
+        .h1 {
+          font-size: 34px;
+          line-height: 112%;
+        }
+
+        &_link {
+          margin-top: 10px;
+          gap: 12px;
+          align-items: stretch; /* чтобы кнопка/ссылка ровно */
+        }
+      }
+
+      &_slider {
+        padding: 0;
+      }
+    }
+
+    &_mapGo {
+      font-size: 14px;
+      line-height: 130%;
+    }
+
+    .butT1 {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 28px;
+      box-shadow: none; /* на мобилке часто лишний */
+    }
+  }
+
+  /* Swiper на мобилке */
+  .aboutSwiper {
+    padding: 6px 0 34px; /* точки ниже, но компактно */
+
+    .swiper-pagination {
+      bottom: 0 !important;
+    }
+  }
+
+  .aboutSlide {
+    width: 270px; /* чтобы “подглядывание” слайдов оставалось */
+  }
+
+  .aboutSlideInner {
+    border-radius: 14px;
+
+    /* ограничим высоту, чтобы на 667px не было ощущения “один слайдер и всё” */
+    height: 320px;
+
+    img {
+      height: 100%;
+    }
+  }
+}

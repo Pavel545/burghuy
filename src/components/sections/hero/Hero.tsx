@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero_head">
+        <header className="hero_head">
           <a
             className="loka_box flex items-center gap-5"
             href="http://"
@@ -53,7 +53,7 @@ export default function Hero() {
             />
             <span>+7 (8422) 27-10-27</span>
           </a>
-        </div>
+        </header>
       </div>
       <div className="hero_content container flex">
         <div>
@@ -65,8 +65,8 @@ export default function Hero() {
             Полное закрытие заведения <br /> под любое мероприятие
           </p>
 
-          <div className="flex gap-14 mb-50 mt-27">
-            <button className=" butT1">Забронировать под мероприятие</button>
+          <div className="hero_actions flex gap-14 mb-50 mt-27">
+            <button className="butT1">Забронировать под мероприятие</button>
 
             <button className="butT2">Выбрать зал</button>
           </div>
