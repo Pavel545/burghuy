@@ -29,7 +29,7 @@ export default function About() {
             </p>
 
             <div className="about_content_left_link flex">
-              <button className="butT1">Забронировать зал</button>
+              <a href="https://t.me/test5252525252Bot" className="butT1">Забронировать зал</a>
 
               <a
                 className="about_mapGo"

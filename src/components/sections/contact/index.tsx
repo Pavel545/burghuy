@@ -38,7 +38,7 @@ export default function Contact() {
       </div>
       <div className="container">
         <div className="contact_contact  flex justify-end gap-3 ">
-          <a className="contact_contact_link" href="">
+          <a className="contact_contact_link" href="https://t.me/test5252525252Bot">
             <Image
               src={"/icons/tg.svg"}
               alt="Telegramm"
@@ -54,7 +54,7 @@ export default function Contact() {
               height={80}
             />
           </a>
-          <a className="contact_contact_link" href="">
+          <a className="contact_contact_link" href="https://vk.com/club235327813">
             <Image
               src={"/icons/vk.svg"}
               alt="Telegramm"

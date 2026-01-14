@@ -66,13 +66,13 @@ export default function Hero() {
           </p>
 
           <div className="hero_actions flex gap-14 mb-50 mt-27">
-            <button className="butT1">Забронировать под мероприятие</button>
+            <a href="https://t.me/test5252525252Bot" className="butT1">Забронировать под мероприятие</a>
 
             <button className="butT2">Выбрать зал</button>
           </div>
         </div>
         <div className="hero_content_contact mb-20">
-          <a className="hero_content_contact_link" href="">
+          <a className="hero_content_contact_link" href="https://t.me/test5252525252Bot">
             <Image
               src={"/icons/tg.svg"}
               alt="Telegramm"
@@ -88,7 +88,7 @@ export default function Hero() {
               height={80}
             />
           </a>
-          <a className="hero_content_contact_link" href="">
+          <a className="hero_content_contact_link" href="https://vk.com/club235327813">
             <Image
               src={"/icons/vk.svg"}
               alt="Telegramm"
