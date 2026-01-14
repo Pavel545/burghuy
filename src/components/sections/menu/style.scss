@@ -1,0 +1,56 @@
+.menu {
+
+
+    &_content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        padding: 60px 0;
+
+        gap: 30px;
+
+        .item {
+
+            &_gallary {
+
+                border-bottom: 2px solid #fff;
+
+                display: grid;
+                max-height: 730px;
+                height: 730px;
+
+                &.i-1 {
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-template-rows: repeat(2, 1fr);
+                }
+
+                &.i-2 {
+                    grid-template-rows: repeat(3, calc(37.333333% - 40px));
+                    grid-template-columns: repeat(1, 1fr);
+
+                    height: 100%;
+                }
+
+                &>div {
+                    width: 100%;
+                    height: auto;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+
+                    object-fit: cover;
+                }
+
+                padding: 20px 0;
+                gap: 20px;
+            }
+
+            .h3 {
+                font-size: 32px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
