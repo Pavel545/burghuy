@@ -16,19 +16,19 @@ type Hall = {
 const halls: Hall[] = [
   {
     id: "hall-1",
-    title: "Зал «Большой»",
+    title: "Зал «Буржуй»",
     capacity: "до 80 гостей",
     desc: "Идеален для свадеб, корпоративов и больших банкетов.",
-    bg: "/img/slide1.jpg",
-    bookHref: "https://t.me/test5252525252Bot",
+    bg: "/img/svadb.jpg",
+    bookHref: "https://t.me/Burzyi_bot",
   },
   {
     id: "hall-2",
-    title: "Зал «Камерный»",
+    title: "Зал «№2»",
     capacity: "до 35 гостей",
     desc: "Уютный формат для дней рождений и семейных событий.",
-    bg: "/img/svadb.jpg",
-    bookHref: "https://t.me/test5252525252Bot",
+    bg: "/img/zal2.png",
+    bookHref: "https://t.me/Burzyi_bot",
   },
 ];
 
@@ -110,7 +110,7 @@ function HallsModal({
               <div className="hallCardOverlay" />
               <div className="hallCardContent">
                 <h4 className="hallTitle">{h.title}</h4>
-                <p className="hallMeta">{h.capacity}</p>
+                {/* <p className="hallMeta">{h.capacity}</p> */}
                 <p className="hallDesc">{h.desc}</p>
 
                 <div className="hallActions">
@@ -203,7 +203,7 @@ export default function Hero() {
 
           <div className="hero_actions flex gap-14 mb-50 mt-27">
             <a
-              href="https://t.me/test5252525252Bot"
+              href="https://t.me/Burzyi_bot"
               className="butT1"
               target="_blank"
               rel="noopener noreferrer"
@@ -226,7 +226,7 @@ export default function Hero() {
             className="hero_content_contact_link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://t.me/test5252525252Bot"
+            href="https://t.me/Burzyi_bot"
           >
             <Image src={"/icons/tg.svg"} alt="Telegramm" width={80} height={80} />
           </a>
@@ -242,7 +242,7 @@ export default function Hero() {
             className="hero_content_contact_link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://vk.com/club235327813"
+            href="https://vk.com/burzui_bot"
           >
             <Image src={"/icons/vk.svg"} alt="VK" width={80} height={80} />
           </a>

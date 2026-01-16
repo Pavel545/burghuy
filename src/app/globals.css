@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 
   --f20: clamp(14px, 1.4rem, 21px);
 
@@ -18,7 +18,7 @@
     rgba(214, 190, 87, 1) 87%,
     rgba(197, 163, 63, 1) 100%
   );
-
+  --text-gold:linear-gradient(90deg, #f7e579 0%, #df9339 100%);
   --color-1: #ead1a8;
   --color-2: #c2a16f;
 
@@ -140,9 +140,6 @@ button {
   line-height: 109%;
   letter-spacing: 0px;
 }
-
-
-
 
 /* ====== Global mobile 375x667 ====== */
 @media (max-width: 420px) {

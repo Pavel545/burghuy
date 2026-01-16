@@ -101,6 +101,106 @@
 }
 
 
+
+
+
+
+/* =========================
+   TABLET hero (до 1024px)
+========================= */
+@media (max-width: 1024px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+
+    .logo {
+      top: 10px;
+      img {
+        width: 210px !important;
+        height: auto !important;
+      }
+    }
+
+    &_head {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "logo logo"
+        "loka tel";
+      gap: 18px;
+      padding-top: 18px;
+    }
+
+    .loka_box {
+      grid-area: loka;
+    }
+
+    .tel {
+      grid-area: tel;
+      justify-self: end;
+
+      span {
+        font-size: 20px;
+      }
+
+      img {
+        width: 46px !important;
+        height: 46px !important;
+      }
+    }
+
+    &_content {
+      margin-top: 40px;
+      flex-direction: column;
+      gap: 28px;
+
+      .h1 {
+        font-size: 56px;
+        line-height: 110%;
+      }
+
+      &_ps {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    .hero_actions {
+      gap: 14px;
+      flex-wrap: wrap;
+
+      .butT1,
+      .butT2 {
+        width: 100%;
+        max-width: 420px;
+      }
+    }
+
+    &_content_contact {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-left: 0;
+      padding: 0;
+    }
+  }
+
+   .modalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hallCard {
+    min-height: 300px;
+  }
+
+  .modalTitle {
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   MOBILE hero (до 420px)
+   (если уже есть — оставь, просто добавь hero_actions)
+========================= */
 /* ====== HERO mobile 375x667 ====== */
 @media (max-width: 420px) {
     .hero {
@@ -215,93 +315,6 @@
         margin-bottom: 0;
     }
 }
-
-
-
-/* =========================
-   TABLET hero (до 1024px)
-========================= */
-@media (max-width: 1024px) {
-  .hero {
-    height: auto;
-    min-height: 100vh;
-
-    .logo {
-      top: 10px;
-      img {
-        width: 210px !important;
-        height: auto !important;
-      }
-    }
-
-    &_head {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "logo logo"
-        "loka tel";
-      gap: 18px;
-      padding-top: 18px;
-    }
-
-    .loka_box {
-      grid-area: loka;
-    }
-
-    .tel {
-      grid-area: tel;
-      justify-self: end;
-
-      span {
-        font-size: 20px;
-      }
-
-      img {
-        width: 46px !important;
-        height: 46px !important;
-      }
-    }
-
-    &_content {
-      margin-top: 40px;
-      flex-direction: column;
-      gap: 28px;
-
-      .h1 {
-        font-size: 56px;
-        line-height: 110%;
-      }
-
-      &_ps {
-        font-size: 16px;
-        line-height: 24px;
-      }
-    }
-
-    .hero_actions {
-      gap: 14px;
-      flex-wrap: wrap;
-
-      .butT1,
-      .butT2 {
-        width: 100%;
-        max-width: 420px;
-      }
-    }
-
-    &_content_contact {
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      margin-left: 0;
-      padding: 0;
-    }
-  }
-}
-
-/* =========================
-   MOBILE hero (до 420px)
-   (если уже есть — оставь, просто добавь hero_actions)
-========================= */
 @media (max-width: 420px) {
   .hero {
     .hero_actions {
@@ -460,20 +473,6 @@
   font-size: 12px;
 }
 
-/* TABLET modal */
-@media (max-width: 1024px) {
-  .modalGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .hallCard {
-    min-height: 300px;
-  }
-
-  .modalTitle {
-    font-size: 20px;
-  }
-}
 
 /* MOBILE modal */
 @media (max-width: 420px) {

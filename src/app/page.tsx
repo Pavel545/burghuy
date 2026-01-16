@@ -3,6 +3,7 @@ import Contact from "@/components/sections/contact";
 import Events from "@/components/sections/events/Events";
 import Hero from "@/components/sections/hero/Hero";
 import Menu from "@/components/sections/menu/Menu";
+import { Reviews } from "@/components/sections/reviews/reviews";
 import Footer from "@/components/shared/footer";
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
       <Events/>
       <About/>
       <Menu/>
-
+      <Reviews/>
       <Contact/>
       <Footer/>
    </main>

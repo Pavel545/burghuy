@@ -1,65 +1,237 @@
 .menu {
+  .menu_content {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr 1fr;
+    grid-template-rows: 320px 320px;
+    gap: 30px;
+    padding: 60px 0;
+  }
 
+  .tile {
+    position: relative;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    overflow: hidden;
 
-    &_content {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+    // чтобы кнопка выглядела как карточка
+    display: block;
+    text-align: left;
+    outline: none;
 
-        padding: 60px 0;
-
-        gap: 30px;
-
-        .item {
-
-            &_gallary {
-
-                border-bottom: 2px solid #fff;
-
-                display: grid;
-                max-height: 730px;
-                height: 730px;
-
-                &.i-1 {
-                    grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: repeat(2, 1fr);
-                }
-
-                &.i-2 {
-                    grid-template-rows: repeat(3, calc(37.333333% - 40px));
-                    grid-template-columns: repeat(1, 1fr);
-
-                    height: 100%;
-                }
-
-                &>div {
-                    width: 100%;
-                    height: auto;
-                }
-
-                img {
-                    width: 100%;
-                    height: 100%;
-
-                    object-fit: cover;
-                }
-
-                padding: 20px 0;
-                gap: 20px;
-            }
-
-            .h3 {
-                font-size: 32px;
-                margin-top: 20px;
-            }
-        }
+    &:focus-visible {
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.65);
     }
+
+    .tile_media {
+      position: absolute;
+      inset: 0;
+
+      img {
+        object-fit: cover;
+        transform: scale(1.02);
+        transition: transform 350ms ease;
+      }
+    }
+
+    &:hover .tile_media img {
+      transform: scale(1.07);
+    }
+
+    .tile_label {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      z-index: 2;
+
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+
+      color: #fff;
+      text-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+    }
+
+    // затемнение как на превью
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.0) 40%,
+          rgba(0, 0, 0, 0.55) 100%);
+      z-index: 1;
+    }
+  }
+
+  .tile--big {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+
+  .tile--sm {
+    min-height: 0;
+  }
+
+  /* ====== MODAL ====== */
+  .menu_modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+  }
+
+  .menu_modal_backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.65);
+    cursor: pointer;
+  }
+
+  .menu_modal_card {
+    position: relative;
+    z-index: 2;
+    width: min(980px, 100%);
+    border-radius: 12px;
+    background: #191919;
+    color: #fff;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+    // overflow: hidden;
+  }
+
+  .menu_modal_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 12px 12px 0 0;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .menu_modal_title {
+
+    background: linear-gradient(90deg, #F7E579 0%, #DF9339 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+
+  .menu_modal_close {
+    position: absolute;
+
+  border: 0;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    top: 8px;
+    right: -50px;
+
+
+    cursor: pointer;
+
+    color: #fff;
+    background: #272727;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .menu_modal_body {
+    max-height: min(70vh, 640px);
+    overflow: auto;
+  }
+
+  /* ====== TABLE ====== */
+  .menu_table {
+    padding: 8px 0 10px;
+
+
+  }
+
+  .menu_table_head {
+    display: grid;
+    grid-template-columns: 1fr 110px 110px;
+    gap: 12px;
+
+    padding: 12px 18px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .menu_table_rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu_table_row {
+    display: grid;
+    grid-template-columns: 1fr 110px 110px;
+    gap: 12px;
+
+    padding: 12px 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+    .col_out,
+    .col_price {
+      text-align: right;
+      white-space: nowrap;
+      opacity: 0.92;
+    }
+
+    .col_name {
+      opacity: 0.95;
+      line-height: 1.25;
+    }
+  }
+  /* ====== SCROLLBAR (modal only) ====== */
+.menu_modal_body {
+  scrollbar-width: thin;                /* Firefox */
+  scrollbar-color: #8b8b8b transparent; /* Firefox */
 }
 
+/* Chrome / Edge / Safari */
+.menu_modal_body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu_modal_body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu_modal_body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  transition: background-color 0.25s ease;
+}
+
+.menu_modal_body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+}
+
+/* блокировка скролла под модалкой */
+.no-scroll {
+  overflow: hidden;
+}
 
 /* ====== MENU mobile 375x667 ====== */
 @media (max-width: 420px) {
   .menu {
-    padding: 55px 0; /* вместо .sect 90px */
+    padding: 55px 0;
 
     .h2 {
       margin-left: 0;
@@ -68,64 +240,33 @@
       border-radius: 28px;
     }
 
-    &_content {
+    .menu_content {
       grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 14px;
       padding: 20px 0;
-      gap: 18px;
+    }
 
-      .item {
-        &_gallary {
-          padding: 12px 0;
-          gap: 10px;
+    .tile {
+      height: 190px;
+      border-radius: 12px;
 
-          height: auto;       /* убираем 730px */
-          max-height: none;
-
-          border-bottom-width: 1px;
-
-          /* общий “контейнер” под картинки */
-          & > div {
-            height: 100%;
-          }
-
-          img {
-            border-radius: 5px;
-          }
-
-          &.i-1 {
-            /* 2x2, но компактно */
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            height: 260px;
-          }
-
-          &.i-2 {
-            /* 3 картинки в ряд, чтобы не было огромной высоты */
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 1fr;
-            height: 120px;
-
-            & > div {
-              height: 120px;
-            }
-          }
-
-          &.i-3 {
-            /* 1 картинка — сделаем как баннер */
-            grid-template-columns: 1fr;
-            height: 220px;
-
-            & > div {
-              height: 220px;
-            }
-          }
-        }
-
-        .h3 {
-          font-size: 20px;
-          margin-top: 12px;
-        }
+      &--big {
+        grid-column: auto;
+        grid-row: auto;
+        height: 260px;
       }
+
+      .tile_label {
+        font-size: 16px;
+        left: 14px;
+        bottom: 12px;
+      }
+    }
+
+    .menu_table_head,
+    .menu_table_row {
+     grid-template-columns: 1fr 60px 60px;
     }
   }
 }

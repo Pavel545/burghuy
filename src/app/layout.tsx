@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "Буржуй",
     images: [
       {
-        url: `/og-image.png`, // Путь к изображению для соцсетей
+        url: `./og-image.png`, // Путь к изображению для соцсетей
         width: 1200,
         height: 630,
         alt: "Буржуй - Искусство событий",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Буржуй | Искусство событий",
     description: "БУРЖУЙ - организация уникальных событий и мероприятий",
-    images: [`/og-image.png`],
+    images: [`./og-image.png`],
     creator: "@буржуй",
   },
 
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   },
 
   // Другие важные метатеги
-  manifest: `/manifest.json`,
+  manifest: `./manifest.json`,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
