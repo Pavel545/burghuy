@@ -230,14 +230,14 @@ export default function Hero() {
           >
             <Image src={"/icons/tg.svg"} alt="Telegramm" width={80} height={80} />
           </a>
-          <a className="hero_content_contact_link" target="_blank" href="">
+          {/* <a className="hero_content_contact_link" target="_blank" href="">
             <Image
               src={"/icons/watsapp.svg"}
               alt="Whatsapp"
               width={80}
               height={80}
             />
-          </a>
+          </a> */}
           <a
             className="hero_content_contact_link"
             target="_blank"

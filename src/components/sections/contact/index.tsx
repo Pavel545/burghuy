@@ -46,14 +46,14 @@ export default function Contact() {
               height={80}
             />
           </a>
-          <a className="contact_contact_link" target="_blank" href="">
+          {/* <a className="contact_contact_link" target="_blank" href="">
             <Image
               src={"/icons/watsapp.svg"}
               alt="Telegramm"
               width={80}
               height={80}
             />
-          </a>
+          </a> */}
           <a className="contact_contact_link" target="_blank" href="https://vk.com/burzui_bot">
             <Image
               src={"/icons/vk.svg"}
