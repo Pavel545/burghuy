@@ -12,8 +12,7 @@ const gilroy = localFont({
   display: "swap",
 });
 
-// ВАЖНО: без ./ и лучше без хвостового /
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bughuy-prod.ru").replace(/\/+$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bughuy-prod.acr-agency.ru/").replace(/\/+$/, "");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Буржуй",
     images: [
       {
-        url: "/og-image.png", // <-- обязательно от корня
+        url: "/og-image__Universal_OG_1200x630__1200x630.jpg", // <-- обязательно от корня
         width: 1200,
         height: 630,
         alt: "Буржуй - Искусство событий",
@@ -47,12 +46,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Буржуй | Искусство событий",
     description: "БУРЖУЙ - организация уникальных событий и мероприятий",
-    images: ["/og-image.png"], // <-- от корня
+    images: ["/og-image__Twitter_X_Large_1200x675__1200x675.jpg"], // <-- от корня
   },
 
   icons: {
     icon: [{ url: "/favicon.ico" }],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     other: [{ rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#000000" }],
   },
 
