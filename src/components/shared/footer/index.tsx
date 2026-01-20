@@ -1,23 +1,52 @@
 "use client";
 
 import Image from "next/image";
-import"./style.scss";
+import Link from "next/link";
+import "./style.scss";
+
+import { CookieConsent, openCookieSettings } from "@/components/features/CookieConsent/CookieConsent";
 
 export default function Footer() {
-    
+  return (
+    <footer className="footer">
+      <div className="container footer__top">
+        <Link className="footer__logo" href="/" aria-label="На главную">
+          <Image src="/img/logo.png" alt="Логотип" width={200} height={100} />
+        </Link>
 
-    return (
-        <footer className="footer">
-            <div className="container ">
-                    <a className="footer_logo" href="/">
-                <Image src={'/img/logo.png'} alt="Логотип" width={200} height={100} />
-                
-                </a>
+        <p className="footer__copyright">
+          ©2025 <span className="footer__brand">Буржуй</span>. Все права защищены
+        </p>
+      </div>
 
-                <p className="footer_avtor">
-                    ©2025 Буржуй. Все права защищены
-                </p>
-            </div>
-        </footer>
-    )
+      {/* Нижняя полоса */}
+      <div className="footer__bar">
+        <div className="container footer__barInner">
+          <div className="footer__links">
+            <Link className="footer__link" href="/privacy">
+              Политика конфиденциальности
+            </Link>
+
+            <button
+              type="button"
+              className="footer__link footer__linkBtn"
+              onClick={openCookieSettings}
+            >
+              Настройки cookies
+            </button>
+          </div>
+
+          <div className="footer__dev">
+            <span className="footer__devLabel">Разработка:</span>{" "}
+            <a className="footer__link" href="https://acr-agency.ru/" target="_blank" rel="noreferrer">
+              АЦР
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Сам баннер cookies оставь внизу футера — нормально */}
+      <CookieConsent policyUrl="/privacy" siteName="Буржуй" />
+    </footer>
+  );
 }

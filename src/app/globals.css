@@ -165,3 +165,282 @@ button {
     font-size: 15px;
   }
 }
+
+
+
+
+/* ===== Cookie / Privacy (dark+gold) ===== */
+.uiGoldText {
+  color: transparent;
+  background-image: var(--text-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.uiPanel {
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(234, 209, 168, 0.35);
+  box-shadow: 0 0 45px rgba(194, 161, 111, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 22px;
+}
+
+.uiBtnGhost {
+  border: 1px solid rgba(234, 209, 168, 0.7);
+  color: var(--color-1);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 300;
+  transition: 300ms;
+}
+.uiBtnGhost:hover {
+  box-shadow: 0 0 25px rgba(234, 209, 168, 0.18);
+}
+
+.uiBtnTiny {
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.cookieMiniBar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 999999;
+}
+
+.cookieMiniInner {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 12px 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.cookieMiniRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cookieMiniText {
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(237, 237, 237, 0.92);
+  max-width: 820px;
+}
+
+.cookieMiniActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cookieLink {
+  color: var(--color-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: 250ms;
+}
+.cookieLink:hover {
+  border-bottom-color: var(--color-2);
+}
+
+.uiOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+  z-index: 999999;
+  display: grid;
+  place-items: end center;
+  padding: 12px;
+}
+
+.uiDrawer {
+  width: min(760px, 100%);
+  max-height: 80vh;
+  overflow: auto;
+  padding: 14px;
+}
+
+.uiDrawerHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(234, 209, 168, 0.18);
+  margin-bottom: 10px;
+}
+
+.uiClose {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(234, 209, 168, 0.55);
+  background: transparent;
+  color: var(--color-1);
+  font-size: 22px;
+  line-height: 1;
+  transition: 250ms;
+}
+.uiClose:hover { box-shadow: 0 0 25px rgba(234, 209, 168, 0.18); }
+
+.cookieOpt {
+  border: 1px solid rgba(234, 209, 168, 0.18);
+  border-radius: 18px;
+  padding: 12px;
+  margin-top: 10px;
+  background: rgba(0,0,0,0.35);
+}
+
+.cookieOptTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cookieOptName {
+  color: rgba(237, 237, 237, 0.96);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.cookieOptDesc {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(237, 237, 237, 0.82);
+}
+
+.sw2 {
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(234, 209, 168, 0.65);
+  background: rgba(10,10,10,0.8);
+  position: relative;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: 250ms;
+}
+.sw2[data-on="true"] {
+  background: rgba(194, 161, 111, 0.22);
+}
+.sw2Dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 4px;
+  background: var(--bg-gold2);
+  transition: 250ms;
+}
+.sw2[data-on="true"] .sw2Dot { left: 24px; }
+
+.drawerActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(234, 209, 168, 0.18);
+  margin-top: 12px;
+}
+
+.privacyWrap2 {
+  padding: 70px 0;
+}
+
+.privacyCard2 {
+  padding: 18px;
+}
+
+.privacyTOC2 {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(234, 209, 168, 0.18);
+  background: rgba(0,0,0,0.35);
+}
+
+.privacyTOC2 a {
+  text-decoration: none;
+  color: rgba(237,237,237,0.92);
+  font-weight: 300;
+  transition: 250ms;
+}
+.privacyTOC2 a:hover {
+  transform: translateX(4px);
+  color: var(--color-1);
+}
+
+.privacySection2 {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(234, 209, 168, 0.18);
+  background: rgba(0,0,0,0.35);
+}
+
+.privacySection2 h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(237,237,237,0.96);
+}
+
+.privacyText2 {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(237,237,237,0.86);
+  text-align: justify;
+}
+
+.privacyList2 {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.privacyTable2 {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(234, 209, 168, 0.18);
+}
+.privacyTable2 th, .privacyTable2 td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(234, 209, 168, 0.14);
+  vertical-align: top;
+  text-align: left;
+  font-size: 13px;
+  color: rgba(237,237,237,0.86);
+}
+.privacyTable2 th {
+  color: #000;
+  background: var(--bg-gold2);
+  font-weight: 500;
+}
+
+@media (max-width: 420px) {
+  .cookieMiniText { font-size: 12px; }
+  .uiBtnGhost, .uiBtnTiny { font-size: 13px; padding: 9px 12px; }
+}
