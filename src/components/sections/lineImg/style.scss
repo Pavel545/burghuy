@@ -1,0 +1,21 @@
+.lineImg{
+    width: 100%;
+    height: auto;   
+
+    background: url(../../../../public/img/lineImg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 90px 0;
+
+    &_text{
+font-weight: 500;
+font-size: 70px;
+line-height: 110%;
+text-transform: uppercase;
+text-align: center;
+color: #fff;
+
+max-width: 1300px;
+    }
+}

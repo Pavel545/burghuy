@@ -185,7 +185,7 @@ export const Reviews: React.FC = () => {
           <div className="reviews_pagination" />
 
           <a
-            className="events_conditions"
+            className="link"
             href="https://yandex.ru/maps/org/klub_burzhuy/64697575235/reviews/?ll=48.376973%2C54.299299&z=16"
             target="_blank"
             rel="noopener noreferrer"

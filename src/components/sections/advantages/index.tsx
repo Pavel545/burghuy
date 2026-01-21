@@ -58,7 +58,7 @@ export default function Advantages() {
       <div className="container">
         {/* В макете это выглядит как “пилюля” */}
         <div className="advantages__head">
-          <h2 className="advantages__badge">Преимущества</h2>
+          <h2 className="h2">Преимущества</h2>
         </div>
 
         <div className="advantages__grid">

@@ -3,21 +3,29 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin: 60px 0;
+    gap: 41px;
 
     &_left {
       flex-direction: column;
       gap: 30px;
 
       &_link {
-        flex-direction: column;
-        gap: 20px;
-        align-items: start;
+        gap: 30px;
+        align-items: center;
         margin-top: 50px;
+
       }
 
       .butT3 {
         margin-top: 100px;
       }
+              &_ps{
+font-weight: 500;
+font-size: 18px;
+line-height: 120%;
+color: #fff;
+max-width: 600px;
+        }
     }
 
     &_slider {
@@ -148,6 +156,8 @@
           gap: 12px;
           align-items: stretch; /* чтобы кнопка/ссылка ровно */
         }
+
+
       }
 
       &_slider {

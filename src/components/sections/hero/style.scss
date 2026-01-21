@@ -87,23 +87,137 @@
             padding: 0 17px 15px 0;
 
             &_link {
-                border-radius: 50%;
-                border: 1.5px solid #fff;
 
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                padding: 8px;
+               
             }
         }
     }
 }
 
+/* базово */
+.tgIcon .tgBg {
+  fill: transparent;
+  transition: fill .35s ease;
+}
+.tgIcon .tgStroke {
+  fill: none;
+  stroke: #fff;
+}
+
+/* два слоя стрелки */
+.tgIcon .tgArrow {
+  transition: opacity .35s ease;
+}
+.tgIcon .tgArrowWhite {
+  fill: #fff;
+  opacity: 1;
+}
+.tgIcon .tgArrowGrad {
+  opacity: 0;
+}
+
+/* hover на ссылку-обёртку */
+.hero_content_contact_link:hover .tgIcon .tgBg {
+  fill: #fff;
+}
+.hero_content_contact_link:hover .tgIcon .tgArrowWhite {
+  opacity: 0;
+}
+.hero_content_contact_link:hover .tgIcon .tgArrowGrad {
+  opacity: 1;
+}
 
 
+/* фон круга */
+.waIcon .waBg {
+  fill: transparent;
+  transition: fill .35s ease;
+}
+
+/* обводка */
+.waIcon .waStroke {
+  fill: none;
+  stroke: #fff;
+}
+
+/* плавная смена белый <-> градиент через прозрачность */
+.waIcon .waPath {
+  transition: opacity .35s ease;
+}
+
+.waIcon .waWhite {
+  fill: #fff;
+  opacity: 1;
+}
+
+.waIcon .waGrad {
+  opacity: 0;
+}
+
+/* hover */
+.hero_content_contact_link:hover .waIcon .waBg {
+  fill: #fff;
+}
+
+.hero_content_contact_link:hover .waIcon .waWhite {
+  opacity: 0;
+}
+
+.hero_content_contact_link:hover .waIcon .waGrad {
+  opacity: 1;
+}
+
+/* фон */
+.lokaIcon .lokaBg {
+  fill: transparent;
+  transition: fill .35s ease;
+}
+
+/* обводка */
+.lokaIcon .lokaStroke {
+  fill: none;
+  stroke: #fff;
+}
+
+/* плавная смена белый <-> градиент */
+.lokaIcon .lokaPath {
+  transition: opacity .35s ease;
+}
+
+.lokaIcon .lokaWhite {
+  fill: #fff;
+  opacity: 1;
+}
+
+.lokaIcon .lokaGrad {
+  opacity: 0;
+}
+
+/* hover на всю ссылку loka_box */
+.loka_box:hover .lokaIcon .lokaBg {
+  fill: #fff;
+}
+
+.loka_box:hover .lokaIcon .lokaWhite {
+  opacity: 0;
+}
+
+.loka_box:hover .lokaIcon .lokaGrad {
+  opacity: 1;
+}
 
 
+.loka_box span {
+  color: #fff;
+  transition: color .25s ease;
+}
+
+/* градиентный текст при hover */
+.loka_box:hover span {
+  background: linear-gradient(90deg, #F7E579 0%, #DF9339 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 /* =========================
    TABLET hero (до 1024px)

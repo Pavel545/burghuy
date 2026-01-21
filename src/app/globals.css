@@ -18,11 +18,12 @@
     rgba(214, 190, 87, 1) 87%,
     rgba(197, 163, 63, 1) 100%
   );
-  --text-gold:linear-gradient(90deg, #f7e579 0%, #df9339 100%);
+  --text-gold: linear-gradient(90deg, #f7e579 0%, #df9339 100%);
   --color-1: #ead1a8;
   --color-2: #c2a16f;
 
-  --bg-gold2: linear-gradient(90deg, var(--color-1) 0%, var(--color-2) 100%);
+  --bg-gold2: linear-gradient(90deg, #f7e579 0%, #df9339 100%);
+  --bg-gold3: linear-gradient(196deg, #f7e579 0%, #df9339 100%);
 }
 
 @theme inline {
@@ -82,7 +83,9 @@ button {
 }
 
 .butT1 {
-  background: var(--bg-gold2);
+  background: linear-gradient(90deg, #f7e579 0%, #df9339 50%, #f7e579 100%);
+  background-size: 200% 200%;
+  transition: background-position 500ms ease;
 
   border-radius: 42px;
 
@@ -90,53 +93,80 @@ button {
   font-size: 25px;
 
   padding: 15px 44px;
-  box-shadow: 1px 0px 37px var(--color-2);
 
   transition: 500ms;
   font-weight: 300;
-  &:hover {
-    box-shadow: 1px 0px 37px var(--color-1);
-  }
+}
+.butT1:hover {
+  background-position: 100% 50%;
 }
 
 .butT2 {
-  padding: 15px 44px;
-  border: 1px solid var(--color-1);
-  border-radius: 42px;
-  color: var(--color-1);
-  font-size: 22px;
-  font-weight: 300;
-  width: 356px;
-}
-
-.butT3 {
-  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid #fff;
-  border-radius: 42px;
+  border-radius: 50px;
+  padding: 10px 45px;
   color: #fff;
   font-size: 22px;
   font-weight: 300;
-  width: 356px;
+
+  transition: 300ms;
 }
+
+.butT2:hover {
+  background: #fff;
+  color: #201417;
+}
+
+.link {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 110%;
+  background: var(--text-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  position: relative;
+  cursor: pointer;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--text-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms ease;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+} 
 
 .sect {
   padding: 90px 0;
 }
 
 .h2 {
-  border: 1.5px solid #fff;
-  border-radius: 45px;
-  padding: 10px 47px;
-  width: max-content;
-  margin-left: 11px;
-  font-size: 20px;
-  text-align: center;
-  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 110%;
+  text-transform: uppercase;
+  background: var(--text-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .h1 {
   text-transform: uppercase;
-  font-size: 85px;
+  font-size: 70px;
   line-height: 109%;
   letter-spacing: 0px;
 }
@@ -165,9 +195,6 @@ button {
     font-size: 15px;
   }
 }
-
-
-
 
 /* ===== Cookie / Privacy (dark+gold) ===== */
 .uiGoldText {
@@ -257,7 +284,7 @@ button {
 .uiOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.62);
+  background: rgba(0, 0, 0, 0.62);
   z-index: 999999;
   display: grid;
   place-items: end center;
@@ -292,14 +319,16 @@ button {
   line-height: 1;
   transition: 250ms;
 }
-.uiClose:hover { box-shadow: 0 0 25px rgba(234, 209, 168, 0.18); }
+.uiClose:hover {
+  box-shadow: 0 0 25px rgba(234, 209, 168, 0.18);
+}
 
 .cookieOpt {
   border: 1px solid rgba(234, 209, 168, 0.18);
   border-radius: 18px;
   padding: 12px;
   margin-top: 10px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .cookieOptTop {
@@ -327,7 +356,7 @@ button {
   height: 30px;
   border-radius: 999px;
   border: 1px solid rgba(234, 209, 168, 0.65);
-  background: rgba(10,10,10,0.8);
+  background: rgba(10, 10, 10, 0.8);
   position: relative;
   cursor: pointer;
   flex: 0 0 auto;
@@ -347,7 +376,9 @@ button {
   background: var(--bg-gold2);
   transition: 250ms;
 }
-.sw2[data-on="true"] .sw2Dot { left: 24px; }
+.sw2[data-on="true"] .sw2Dot {
+  left: 24px;
+}
 
 .drawerActions {
   display: flex;
@@ -375,12 +406,12 @@ button {
   padding: 14px;
   border-radius: 18px;
   border: 1px solid rgba(234, 209, 168, 0.18);
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .privacyTOC2 a {
   text-decoration: none;
-  color: rgba(237,237,237,0.92);
+  color: rgba(237, 237, 237, 0.92);
   font-weight: 300;
   transition: 250ms;
 }
@@ -394,20 +425,20 @@ button {
   padding: 16px;
   border-radius: 18px;
   border: 1px solid rgba(234, 209, 168, 0.18);
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .privacySection2 h3 {
   margin-bottom: 8px;
   font-size: 18px;
   font-weight: 500;
-  color: rgba(237,237,237,0.96);
+  color: rgba(237, 237, 237, 0.96);
 }
 
 .privacyText2 {
   font-size: 14px;
   line-height: 1.55;
-  color: rgba(237,237,237,0.86);
+  color: rgba(237, 237, 237, 0.86);
   text-align: justify;
 }
 
@@ -426,13 +457,14 @@ button {
   border-radius: 14px;
   border: 1px solid rgba(234, 209, 168, 0.18);
 }
-.privacyTable2 th, .privacyTable2 td {
+.privacyTable2 th,
+.privacyTable2 td {
   padding: 10px 12px;
   border-bottom: 1px solid rgba(234, 209, 168, 0.14);
   vertical-align: top;
   text-align: left;
   font-size: 13px;
-  color: rgba(237,237,237,0.86);
+  color: rgba(237, 237, 237, 0.86);
 }
 .privacyTable2 th {
   color: #000;
@@ -441,6 +473,12 @@ button {
 }
 
 @media (max-width: 420px) {
-  .cookieMiniText { font-size: 12px; }
-  .uiBtnGhost, .uiBtnTiny { font-size: 13px; padding: 9px 12px; }
+  .cookieMiniText {
+    font-size: 12px;
+  }
+  .uiBtnGhost,
+  .uiBtnTiny {
+    font-size: 13px;
+    padding: 9px 12px;
+  }
 }

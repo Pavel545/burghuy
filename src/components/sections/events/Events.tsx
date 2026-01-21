@@ -133,19 +133,7 @@ export default function Events() {
   return (
     <section className="events sect">
       <div className="container">
-        <div className="flex justify-between items-center mb-12">
           <h2 className="h2">Мероприятия</h2>
-
-          <p
-            className="events_conditions"
-            role="button"
-            tabIndex={0}
-            onClick={() => setIsOpen(true)}
-            onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
-          >
-            Условия проведения
-          </p>
-        </div>
 
         <div className="events_grid">
           {events.map((ev) => (
@@ -164,12 +152,27 @@ export default function Events() {
 
               <div className="events_info">
                 <h3 className="events_title">{ev.title}</h3>
-                <a className="events_btn butT1" target="_blank" href={ev.href}>
+                <a className="events_btn " target="_blank" href={ev.href}>
                   Узнать подробнее
                 </a>
               </div>
             </article>
           ))}
+        </div>
+         <div className="flex  items-center mt-12 gap-20">
+          <button className="butT1">
+            Выбрать мероприятие
+          </button>
+
+          <p
+            className="link"
+            role="button"
+            tabIndex={0}
+            onClick={() => setIsOpen(true)}
+            onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
+          >
+            Условия проведения
+          </p>
         </div>
       </div>
 
