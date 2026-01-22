@@ -9,36 +9,48 @@ export default function Contact() {
       <div className="container grid grid-cols-2">
         <div className="contact_info">
           <h2 className="h2">Контакты</h2>
-          <a className="text-gold h1" href="tel:+78422271027">
-            +7 (8422) 27-10-27
-          </a>{" "}
-          <br />
-          <a className="text-gold mail" href="mailto:burzhuy73@mail.ru">
-            burzhuy73@mail.ru
-          </a>
-          <div className="contact_lineInfo flex justify-between mb-6 mt-6">
-            <p className="">АДРЕС</p>
-            <a target="_blank" href="https://yandex.ru/maps/-/CLdTyWYe">г. Ульяновск, Пушкинская 4а</a>
+          <div className="contact_info_box  ">
+            <a
+              className="contact_info_text"
+              target="_blank"
+              href="https://yandex.ru/maps/-/CLdTyWYe"
+            >
+              г. Ульяновск, Пушкинская 4а
+            </a>
+            <a className="contact_info_text" href="tel:+78422271027">
+              +7 (8422) 27-10-27
+            </a>
+            <a
+              className="contact_info_text mail"
+              href="mailto:burzhuy73@mail.ru"
+            >
+              burzhuy73@mail.ru
+            </a>
           </div>
-          <div className="contact_lineInfo flex justify-between">
-            <p>ВРЕМЯ РАБОТЫ</p>
-            <p>
-              Вс-Чт: 12:00 - 03:00 <br />
-              Пт-Сб: 12:00 - 06:00
-            </p>
-          </div>
+            <p className="h2 contact_info_time">ВРЕМЯ РАБОТЫ</p>
+            <div className="contact_info_box">
+              <p className="contact_info_text">
+                Вс-Чт: 12:00 - 03:00 <br />
+                Пт-Сб: 12:00 - 06:00
+              </p>
+            </div>
         </div>
         <div className="contact_loc">
-          <Image src={"/img/logo.png"} alt="Telegramm" width={200} height={100} />
+          <Image
+            src={"/img/logo.png"}
+            alt="Telegramm"
+            width={200}
+            height={100}
+          />
 
-          <a href="https://yandex.ru/maps/-/CLdTyWYe" className="butT1 mt-20">
-            мы на карте 
+          <a href="https://yandex.ru/maps/-/CLdTyWYe" className="butT1 mt-5">
+           Ищите нас на карте
           </a>
         </div>
       </div>
       <div className="container">
-        <div className="contact_contact  flex justify-end gap-3 ">
-                    <a
+        <div className="contact_soc  flex justify-end gap-3 ">
+          <a
             className="hero_content_contact_link"
             target="_blank"
             rel="noopener noreferrer"
