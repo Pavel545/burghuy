@@ -1,42 +1,67 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import "./style.scss";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 type Hall = {
   id: string;
-  title: string;
-  capacity: string;
-  desc: string;
-  bg: string; // путь к картинке
-  bookHref: string; // куда бронировать
+  tabLabel: string;      // как в шапке
+  titleTop: string;      // "Зал"
+  title: string;         // "БУРЖУЙ"
+  subtitle: string;      // строка мелким
+  featuresTitle: string; // "Характеристика:"
+  features: string[];
+  fitsTitle: string;     // "Подходит для:"
+  fits: string[];
+  gallery: string[];
+  bookHref: string;
 };
 
 const halls: Hall[] = [
   {
-    id: "hall-1",
-    title: "Зал «Буржуй»",
-    capacity: "до 80 гостей",
-    desc: "Идеален для свадеб, корпоративов и больших банкетов.",
-    bg: "/img/svadb.jpg",
+    id: "burzhuy",
+    tabLabel: "ЗАЛ «БУРЖУЙ»",
+    titleTop: "Зал",
+    title: "БУРЖУЙ",
+    subtitle: "вход со стороны УлГУ, с улицы 12 Сентября",
+    featuresTitle: "Характеристика:",
+    features: ["Вместительность — 40 человек", "Свой вход", "Свой туалет", "Свой гардероб"],
+    fitsTitle: "Подходит для:",
+    fits: ["Свадеб", "Юбилеев", "Корпоративов"],
+    gallery: ["/img/halls/zal1/1.jpg", "/img/halls/zal1/2.jpg", "/img/halls/zal1/3.jpg", "/img/halls/zal1/4.jpg", "/img/halls/zal1/5.jpg", "/img/halls/zal1/6.jpg", "/img/halls/zal1/7.jpg"],
     bookHref: "https://t.me/Burzyi_bot",
   },
   {
-    id: "hall-2",
-    title: "Зал «№2»",
-    capacity: "до 35 гостей",
-    desc: "Уютный формат для дней рождений и семейных событий.",
-    bg: "/img/zal2.png",
+    id: "dekanat",
+    tabLabel: "ЗАЛ «КАФЕ ДЕКАНАТ»",
+    titleTop: "Зал",
+    title: "КАФЕ ДЕКАНАТ",
+    subtitle: "вход со стороны УлГУ, с улицы 12 Сентября",
+    featuresTitle: "Характеристика:",
+    features: ["Вместительность — 40 человек", "Свой вход", "Свой туалет", "Свой гардероб"],
+    fitsTitle: "Подходит для:",
+    fits: ["Свадеб", "Юбилеев", "Корпоративов"],
+    gallery: ["/img/halls/zal2/1.jpg", "/img/halls/zal2/2.jpg"],
     bookHref: "https://t.me/Burzyi_bot",
   },
 ];
+
+
 
 function HallsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // Esc + блокировка скролла + фокус
+  const [activeId, setActiveId] = useState(halls[0]?.id ?? "");
+  const activeHall = useMemo(
+    () => halls.find((h) => h.id === activeId) ?? halls[0],
+    [activeId]
+  );
+
   useEffect(() => {
     if (!open) return;
 
@@ -46,9 +71,8 @@ function HallsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    window.addEventListener("keydown", onKeyDown);
 
-    // фокус на панель
+    window.addEventListener("keydown", onKeyDown);
     setTimeout(() => panelRef.current?.focus(), 0);
 
     return () => {
@@ -57,79 +81,126 @@ function HallsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  // если модалка закрылась — можно сбрасывать на первый зал (по желанию)
+  useEffect(() => {
+    if (!open) return;
+    if (!activeId) setActiveId(halls[0]?.id ?? "");
+  }, [open, activeId]);
+
+  if (!open || !activeHall) return null;
 
   return (
     <div
-      className="modalOverlay"
+      className="hallsPop"
       role="presentation"
       onMouseDown={(e) => {
-        // закрываем только если клик по оверлею, а не по модалке
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div
-        className="modalPanel"
+        className="hallsPop__panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         ref={panelRef}
         tabIndex={-1}
       >
-        <div className="modalTop">
-          <div className="modalTitleWrap">
-            <p className="modalEyebrow">Выбор зала</p>
-            <h3 className="modalTitle" id={titleId}>
-              Какой зал вам подходит?
-            </h3>
+        {/* TOP BAR */}
+        <div className="hallsPop__top">
+          <div className="hallsPop__tabs" role="tablist" aria-label="Выбор зала">
+            {halls.map((h) => {
+              const checked = h.id === activeId;
+              return (
+                <button
+                  key={h.id}
+                  type="button"
+                  className={`hallsPop__tab ${checked ? "is-active" : ""}`}
+                  onClick={() => setActiveId(h.id)}
+                  role="tab"
+                  aria-selected={checked}
+                >
+                  <span className={`hallsPop__radio ${checked ? "is-on" : ""}`} />
+                  <span className="hallsPop__tabText">{h.tabLabel}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="hallsPop__brand">
+            <div className="hallsPop__logo">
+              <Image src="/img/logo.png" alt="Буржуй" fill />
+            </div>
           </div>
 
           <button
-            className="modalClose"
+            className="hallsPop__close"
             type="button"
             onClick={onClose}
             aria-label="Закрыть"
           >
-            ✕
+            ×
           </button>
         </div>
 
-        <div className="modalGrid">
-          {halls.map((h) => (
-            <div
-              key={h.id}
-              className="hallCard"
-              style={{ backgroundImage: `url(${h.bg})` }}
-            >
-              <div className="hallCardOverlay" />
-              <div className="hallCardContent">
-                <h4 className="hallTitle">{h.title}</h4>
-                {/* <p className="hallMeta">{h.capacity}</p> */}
-                <p className="hallDesc">{h.desc}</p>
+        {/* BODY */}
+        <div className="hallsPop__body">
+          {/* LEFT */}
+          <div className="hallsPop__left">
+            <p className="hallsPop__eyebrow">{activeHall.titleTop}</p>
+            <h3 className="hallsPop__title" id={titleId}>
+              {activeHall.title}
+            </h3>
+            <p className="hallsPop__subtitle">{activeHall.subtitle}</p>
 
-                <div className="hallActions">
-                  <a
-                    className="butT1 hallBookBtn"
-                    href={h.bookHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Забронировать
-                  </a>
-                </div>
-              </div>
+            <div className="hallsPop__block">
+              <h4 className="hallsPop__h">{activeHall.featuresTitle}</h4>
+              <ul className="hallsPop__list">
+                {activeHall.features.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
 
-        <p className="modalHint">
-          Можно закрыть окно по <b>Esc</b> или кликом по фону.
-        </p>
+            <div className="hallsPop__block">
+              <h4 className="hallsPop__h">{activeHall.fitsTitle}</h4>
+              <ul className="hallsPop__list">
+                {activeHall.fits.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
+
+            <a
+              className="hallsPop__book"
+              href={activeHall.bookHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Забронировать
+            </a>
+          </div>
+
+          {/* RIGHT */}
+          <div className="hallsPop__right">
+            <Swiper
+              modules={[Pagination, A11y]}
+              pagination={{ clickable: true }}
+              className="hallsPop__swiper"
+            >
+              {(activeHall.gallery || []).map((src, i) => (
+                <SwiperSlide key={`${src}-${i}`}>
+                  <div className="hallsPop__slide">
+                    <Image src={src} alt={`${activeHall.title} фото ${i + 1}`} fill />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
 export default function Hero() {
   const [open, setOpen] = useState(false);
 

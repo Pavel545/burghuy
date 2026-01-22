@@ -1,0 +1,157 @@
+.modal {
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.45);
+
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: none;
+
+  /* центрирование */
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  &_active {
+    display: flex;
+  }
+
+  &_content {
+    width: min(900px, 100%);
+    max-height: min(86vh, 900px);
+
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    /* убираем absolute/translate — теперь flex центрирует */
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* header (у тебя это Swiper) */
+  &_header {
+    flex: 0 0 auto;
+  }
+
+  /* тело — скроллится если текста много */
+  &_body {
+    padding: 24px 28px;
+    overflow: auto;
+    flex: 1 1 auto;
+
+    /* приятный скролл */
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &_footer {
+    flex: 0 0 auto;
+
+    padding: 16px 22px;
+    background: #2a2a2a;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    border-radius: 0 0 10px 10px;
+
+    &__contactName {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 700;
+
+      span {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.55);
+      }
+    }
+
+    &__phones {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    &__phone {
+      display: inline-block;
+      margin-top: 8px;
+
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+
+      background: var(--text-gold);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .modal {
+    padding: 12px;
+
+    &_body {
+      padding: 16px 16px;
+    }
+
+    &_footer {
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      &__phone {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .modal {
+    padding: 10px;
+
+    &_content {
+      max-height: 90vh;
+      border-radius: 12px;
+    }
+
+    &_body {
+      padding: 14px 14px;
+    }
+
+    &_footer {
+      padding: 12px 14px;
+
+      &__phone {
+        font-size: 18px;
+      }
+    }
+  }
+}

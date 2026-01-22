@@ -96,6 +96,7 @@ button {
 
   transition: 500ms;
   font-weight: 300;
+  text-align: center;
 }
 .butT1:hover {
   background-position: 100% 50%;
@@ -189,6 +190,7 @@ button {
     padding: 12px 16px;
     font-size: 16px;
     border-radius: 28px;
+    text-align: center;
   }
 
   .butT2 {

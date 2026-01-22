@@ -1,25 +1,29 @@
+/* style.scss */
+
 .contact {
+  /* ===== layout blocks ===== */
   &_info {
     .h2 {
       margin-bottom: 25px;
     }
-   
 
+    /* hover только для ссылок */
     a.contact_info_text:hover {
       text-decoration: underline;
       color: var(--color-2);
     }
+
     &_text {
       font-weight: 500;
       font-size: clamp(16px, 1.5vw, 30px);
       line-height: 110%;
       color: #fff;
-
-      transition: all 0.3s ease; }
+      transition: all 0.3s ease;
+      word-break: break-word;
+    }
 
     &_box {
       margin: 20px 0;
-
       display: flex;
       flex-direction: column;
       gap: 15px;
@@ -28,26 +32,154 @@
     &_time {
       margin-top: 70px;
     }
-
-
   }
 
   &_soc {
     margin-top: 50px;
   }
 
+  /* правый блок */
   &_loc {
     background: url(../../../../public/img/contact_fon.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
+
     min-height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    /* чтобы контент читался на фоне */
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
+
+    /* все дети поверх затемнения */
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+    }
   }
+}
 
+/* ====== ADAPTIVE ====== */
 
+/* <= 1024px */
+@media (max-width: 1024px) {
+  .contact {
+    &_info {
+      .h2 {
+        margin-bottom: 18px;
+      }
+
+      &_text {
+        font-size: clamp(16px, 2.2vw, 24px);
+      }
+
+      &_time {
+        margin-top: 40px;
+      }
+    }
+
+    &_loc {
+      min-height: 420px;
+      padding: 18px;
+    }
+
+    &_soc {
+      margin-top: 35px;
+    }
+  }
+}
+
+/* <= 768px (главное: 2 колонки -> 1 колонка) */
+@media (max-width: 768px) {
+  .contact {
+    /* контейнер у тебя: "container grid grid-cols-2"
+       grid-cols-2 — tailwind, перебиваем здесь */
+    .container.grid.grid-cols-2 {
+      grid-template-columns: 1fr !important;
+      gap: 18px;
+    }
+
+    &_info {
+      &_box {
+        margin: 14px 0;
+        gap: 12px;
+      }
+
+      &_time {
+        margin-top: 28px;
+      }
+
+      &_text {
+        font-size: 18px; /* читаемо на моб/планш */
+        line-height: 1.25;
+      }
+    }
+
+    &_loc {
+      min-height: 320px;
+      padding: 18px;
+    }
+
+    &_soc {
+      margin-top: 28px;
+
+      /* у тебя: flex justify-end */
+      justify-content: flex-start !important;
+    }
+  }
+}
+
+/* <= 420px */
+@media (max-width: 420px) {
+  .contact {
+    .container.grid.grid-cols-2 {
+      gap: 14px;
+    }
+
+    &_info {
+      .h2 {
+        margin-bottom: 14px;
+      }
+
+      &_text {
+        font-size: 16px;
+        line-height: 1.25;
+      }
+
+      &_time {
+        margin-top: 22px;
+      }
+    }
+
+    &_loc {
+      min-height: 260px;
+      padding: 14px;
+      gap: 12px;
+    }
+
+    &_soc {
+      margin-top: 22px;
+    }
+  }
 }

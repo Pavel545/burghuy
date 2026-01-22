@@ -1,4 +1,7 @@
+/* style.scss */
+
 .events {
+  /* ===== GRID ===== */
   &_grid {
     margin: 40px 0 0;
 
@@ -10,19 +13,20 @@
       "a a b b c c"
       "d d d e e e";
 
-    /* БЛОКИ ВЫШЕ */
+    /* базовая высота карточек */
     grid-auto-rows: 400px;
   }
 
   &_card {
     position: relative;
-    border-radius: 4px;
+    border-radius: 6px;
     overflow: hidden;
 
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: rgba(0, 0, 0, 0.2);
 
     transition: transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
 
     &:hover {
       transform: translateY(-2px);
@@ -30,55 +34,50 @@
     }
   }
 
-  &_conditions {
+  /* У тебя в JSX "link", а в SCSS было _conditions — добавил поддержку обоих */
+  &_conditions,
+  .link {
     background: var(--text-gold);
-    -webkit-text-fill-color: #0000;
-    letter-spacing: .2px;
+    -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
+
+    letter-spacing: 0.2px;
     font-size: 16px;
     font-weight: 800;
 
     cursor: pointer;
     position: relative;
+    display: inline-block;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       bottom: -4px;
       width: 100%;
       height: 2px;
       background: var(--text-gold);
-
       transition: 300ms ease;
     }
 
     &:hover::after {
-
       height: 5px;
     }
-
-
-
   }
 
   .area-a {
     grid-area: a;
   }
-
   .area-b {
     grid-area: b;
   }
-
   .area-c {
     grid-area: c;
   }
-
   .area-d {
     grid-area: d;
   }
-
   .area-e {
     grid-area: e;
   }
@@ -108,10 +107,12 @@
   &_overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-        rgba(0, 0, 0, 0.10) 0%,
-        rgba(0, 0, 0, 0.55) 60%,
-        rgba(0, 0, 0, 0.85) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.55) 60%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
   }
 
   &_info {
@@ -124,6 +125,9 @@
     flex-direction: column;
     justify-content: flex-end;
     gap: 12px;
+
+    /* чтобы клики шли по карточке, а не по тексту */
+    pointer-events: none;
   }
 
   &_title {
@@ -139,12 +143,12 @@
     font-size: 20px;
     line-height: 110%;
     background: var(--text-gold);
-    background-clip: text;
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
-  /* ===== MODAL ===== */
+  /* ===== MODAL (если где-то используешь эти классы) ===== */
   &_modal {
     position: fixed;
     inset: 0;
@@ -171,8 +175,6 @@
     border: 1px solid rgba(255, 255, 255, 0.14);
     background: rgba(18, 18, 18, 0.92);
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-
-    transform: translateY(0);
   }
 
   &_modal__close {
@@ -205,27 +207,6 @@
     }
   }
 
-  &_modal__body {
-    padding: 54px 18px 18px;
-    /* место под крестик */
-    max-height: inherit;
-    overflow: auto;
-
-    /* nice scrollbar (webkit) */
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.06);
-    }
-  }
-
   &_modal__img {
     width: 100%;
 
@@ -234,7 +215,7 @@
       height: auto;
       display: block;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 }
@@ -249,9 +230,7 @@
         "c d"
         "e e";
 
-      /* выше и на планшете */
       grid-auto-rows: 280px;
-
       gap: 14px;
       margin-top: 24px;
     }
@@ -260,7 +239,9 @@
       font-size: 22px;
     }
 
-    &_btn {}
+    &_btn {
+      font-size: 16px;
+    }
   }
 }
 
@@ -287,7 +268,6 @@
         "d"
         "e";
 
-      /* БЛОКИ ВЫШЕ НА МОБИЛКЕ */
       grid-auto-rows: 220px;
       gap: 14px;
     }
@@ -302,7 +282,9 @@
       letter-spacing: 0.4px;
     }
 
-
+    &_btn {
+      font-size: 15px;
+    }
 
     /* На мобилке hover нет — оставим не “в ноль” серым, чтобы было живее */
     &_media img {
@@ -318,13 +300,8 @@
       max-height: 90vh;
       border-radius: 16px;
     }
-
-    &_modal__body {
-      padding: 52px 12px 12px;
-    }
   }
 }
-
 
 /* ===== POPUP CONDITIONS ===== */
 .eventsPop {
@@ -352,13 +329,18 @@
   background: #1b1b1b;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+
+  /* важно для корректного скролла внутри */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .eventsPop__head {
   position: relative;
   padding: 18px 56px 18px 22px;
   background: #2a2a2a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .eventsPop__title {
@@ -373,14 +355,20 @@
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+
+  /* чтобы заголовок не залезал под логотип */
+  padding-right: 120px;
 }
 
-/* опционально под логотип */
+/* ЛОГОТИП: не хватало position */
 .eventsPop__logo {
+  position: absolute;
   right: 60px;
   top: 10px;
+
   width: 99px;
   height: 56px;
+
   opacity: 0.95;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 
@@ -420,21 +408,23 @@
   }
 }
 
+/* тело — делаем реально адаптивным по высоте панели */
 .eventsPop__body {
   padding: 18px 22px;
-  max-height: calc(min(86vh, 900px) - 170px);
-  overflow: auto;
 
-  /* скролл как в макете */
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+
+  /* скролл */
   &::-webkit-scrollbar {
     width: 10px;
   }
-
   &::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.18);
     border-radius: 10px;
   }
-
   &::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.06);
   }
@@ -482,7 +472,7 @@
 .eventsPop__foot {
   padding: 16px 22px;
   background: #2a2a2a;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -507,8 +497,6 @@
   flex-wrap: wrap;
 }
 
-
-
 .eventsPop__phone {
   display: inline-block;
   margin-top: 8px;
@@ -528,10 +516,20 @@
   }
 }
 
-/* ===== responsive ===== */
+/* ===== responsive conditions popup ===== */
 @media (max-width: 768px) {
+  .eventsPop__head {
+    padding: 14px 52px 14px 14px;
+  }
+
   .eventsPop__title {
     font-size: 18px;
+    padding-right: 0; /* на маленьких лучше не резервировать под логотип */
+  }
+
+  /* логотип убираем/уменьшаем, чтобы не ломал шапку */
+  .eventsPop__logo {
+    display: none;
   }
 
   .eventsPop__foot {
@@ -546,10 +544,6 @@
 @media (max-width: 420px) {
   .eventsPop {
     padding: 12px;
-  }
-
-  .eventsPop__head {
-    padding: 14px 52px 14px 14px;
   }
 
   .eventsPop__body {
@@ -572,5 +566,135 @@
 
   .eventsPop__phone {
     font-size: 18px;
+  }
+}
+
+/* ===== EVENT POPUP (контент модалки события) ===== */
+.eventPop {
+  &_title {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 110%;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  &_count {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 110%;
+    color: #fff;
+  }
+}
+
+/* ===== SWIPER INSIDE MODAL ===== */
+.eventPop__swiper {
+  width: 100%;
+  position: relative;
+
+  height: 420px;
+
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+
+  /* вместо padding-bottom — пагинация поверх (не съедает высоту на мобилке) */
+  .swiper-pagination {
+    bottom: 10px !important;
+  }
+
+  .swiper-pagination-bullet {
+    opacity: 0.35;
+    transform: scale(0.95);
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.2s ease;
+  }
+
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 16px;
+    font-weight: 900;
+  }
+}
+
+.eventPop__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 1024px) {
+  .eventPop__swiper {
+    height: 320px;
+  }
+
+  .eventPop {
+    &_title {
+      font-size: 24px;
+    }
+    &_count {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .eventPop__swiper {
+    height: 260px;
+
+    /* на тач-устройствах стрелки часто мешают */
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none;
+    }
+  }
+
+  .eventPop {
+    &_title {
+      font-size: 20px;
+    }
+    &_count {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .eventPop__swiper {
+    height: 220px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .eventPop {
+    &_title {
+      font-size: 18px;
+    }
   }
 }

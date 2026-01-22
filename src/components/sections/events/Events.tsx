@@ -3,8 +3,13 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import "./style.scss";
-import { title } from "process";
+import Modal from "@/components/ui/Modal/Modal";
 import { text } from "stream/consumers";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const events = [
   {
@@ -12,35 +17,46 @@ const events = [
     img: "/img/events/svadb.jpg",
     alt: "Организация свадьб",
     href: "https://t.me/Burzyi_bot",
+    gall: ["/img/events/svadb.jpg"],
     area: "a",
+    text: "Планируете незабываемое торжество в красивой обстановке? <br>Вместительность зала позволяет создать уютную и праздничную атмосферу для близких и друзей.<br>Интерьер выполнен в элегантном стиле с милыми деталями, мягким освещением и изысканной мебелью, создавая идеальное пространство для торжественных моментов и фотосессий.<br>Мы предоставляем все необходимое для проведения счастливого дня: уютные заловые пространства, современное оборудование, возможность оформления по вашему желанию, а также профессиональную организацию и сопровождение.<br>Создайте свою сказку вместе с нами — мы сделаем всё, чтобы ваш особенный день прошёл идеально!",
   },
   {
     title: "Юбилеи",
     img: "/img/events/yub.jpg",
     alt: "Организация юбилеев",
     href: "https://t.me/Burzyi_bot",
+    gall: ["/img/events/yub.jpg"],
     area: "b",
+    text: "Планируете незабываемое торжество в красивой обстановке? <br>Вместительность зала позволяет создать уютную и праздничную атмосферу для близких и друзей.<br>Интерьер выполнен в элегантном стиле с милыми деталями, мягким освещением и изысканной мебелью, создавая идеальное пространство для торжественных моментов и фотосессий.<br>Мы предоставляем все необходимое для проведения счастливого дня: уютные заловые пространства, современное оборудование, возможность оформления по вашему желанию, а также профессиональную организацию и сопровождение.<br>Создайте свою сказку вместе с нами — мы сделаем всё, чтобы ваш особенный день прошёл идеально!",
   },
   {
     title: "Корпоративы",
     img: "/img/events/korp.jpg",
     alt: "Организация корпоративов",
     href: "https://t.me/Burzyi_bot",
+    gall: ["/img/events/korp.jpg"],
     area: "c",
+    text: "Планируете незабываемое торжество в красивой обстановке? <br>Вместительность зала позволяет создать уютную и праздничную атмосферу для близких и друзей.<br>Интерьер выполнен в элегантном стиле с милыми деталями, мягким освещением и изысканной мебелью, создавая идеальное пространство для торжественных моментов и фотосессий.<br>Мы предоставляем все необходимое для проведения счастливого дня: уютные заловые пространства, современное оборудование, возможность оформления по вашему желанию, а также профессиональную организацию и сопровождение.<br>Создайте свою сказку вместе с нами — мы сделаем всё, чтобы ваш особенный день прошёл идеально!",
   },
   {
     title: "Дни рождения",
     img: "/img/events/dr.jpg",
     alt: "Организация Дней рождений",
     href: "https://t.me/Burzyi_bot",
+    gall: ["/img/events/dr.jpg"],
     area: "d",
+
+    text: "Планируете незабываемое торжество в красивой обстановке? <br>Вместительность зала позволяет создать уютную и праздничную атмосферу для близких и друзей.<br>Интерьер выполнен в элегантном стиле с милыми деталями, мягким освещением и изысканной мебелью, создавая идеальное пространство для торжественных моментов и фотосессий.<br>Мы предоставляем все необходимое для проведения счастливого дня: уютные заловые пространства, современное оборудование, возможность оформления по вашему желанию, а также профессиональную организацию и сопровождение.<br>Создайте свою сказку вместе с нами — мы сделаем всё, чтобы ваш особенный день прошёл идеально!",
   },
   {
     title: "Банкеты",
     img: "/img/events/banket.jpg",
     alt: "Организация банкетов",
+    gall: ["/img/events/banket.jpg"],
     href: "https://t.me/Burzyi_bot",
     area: "e",
+    text: "Планируете незабываемое торжество в красивой обстановке? <br>Вместительность зала позволяет создать уютную и праздничную атмосферу для близких и друзей.<br>Интерьер выполнен в элегантном стиле с милыми деталями, мягким освещением и изысканной мебелью, создавая идеальное пространство для торжественных моментов и фотосессий.<br>Мы предоставляем все необходимое для проведения счастливого дня: уютные заловые пространства, современное оборудование, возможность оформления по вашему желанию, а также профессиональную организацию и сопровождение.<br>Создайте свою сказку вместе с нами — мы сделаем всё, чтобы ваш особенный день прошёл идеально!",
   },
 ];
 
@@ -111,6 +127,15 @@ const conditions = [
 
 export default function Events() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isActiveEvent, setIsActiveEvent] = useState<{
+    title: string;
+    img: string;
+    alt: string;
+    href: string;
+    gall: string[];
+    area: string;
+    text: string;
+  }>({ title: "", img: "", alt: "", href: "", gall: [], area: "", text: "" });
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -133,11 +158,15 @@ export default function Events() {
   return (
     <section className="events sect">
       <div className="container">
-          <h2 className="h2">Мероприятия</h2>
+        <h2 className="h2">Мероприятия</h2>
 
         <div className="events_grid">
           {events.map((ev) => (
-            <article key={ev.title} className={`events_card area-${ev.area}`}>
+            <article
+              key={ev.title}
+              onClick={() => setIsActiveEvent(ev)}
+              className={`events_card area-${ev.area}`}
+            >
               <div className="events_media">
                 <Image
                   src={ev.img}
@@ -152,17 +181,13 @@ export default function Events() {
 
               <div className="events_info">
                 <h3 className="events_title">{ev.title}</h3>
-                <a className="events_btn " target="_blank" href={ev.href}>
-                  Узнать подробнее
-                </a>
+                <p className="events_btn">Узнать подробнее</p>
               </div>
             </article>
           ))}
         </div>
-         <div className="flex  items-center mt-12 gap-20">
-          <button className="butT1">
-            Выбрать мероприятие
-          </button>
+        <div className="flex  items-center mt-12 gap-20">
+          <button className="butT1">Выбрать мероприятие</button>
 
           <p
             className="link"
@@ -175,6 +200,56 @@ export default function Events() {
           </p>
         </div>
       </div>
+      {/* POPUP информационный */}
+      {isActiveEvent.title && (
+        <Modal
+          header={
+            <Swiper
+              modules={[Navigation, Pagination, A11y]}
+              navigation
+              pagination={{ clickable: true }}
+              className="eventPop__swiper"
+            >
+              {(isActiveEvent.gall || []).map((src, i) => (
+                <SwiperSlide key={`${src}-${i}`}>
+                  <div className="eventPop__slide">
+                    <Image
+                      src={src}
+                      alt={`${isActiveEvent.title} фото ${i + 1}`}
+                      fill
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          }
+          onClose={() => {
+            setIsActiveEvent({
+              title: "",
+              img: "",
+              alt: "",
+              href: "",
+              gall: [],
+              area: "",
+              text: "",
+            });
+            document.body.style.overflow = "auto";
+          }}
+          isActive={!!isActiveEvent.title}
+          children={
+            <>
+              <h3 className="eventPop_title mb-2">{isActiveEvent.title}</h3>
+              <p className="eventPop_count mb-4">
+                Вместительность от 50 до 100 гостей
+              </p>
+              <p
+                className="modal_text"
+                dangerouslySetInnerHTML={{ __html: isActiveEvent.text }}
+              ></p>
+            </>
+          }
+        />
+      )}
 
       {/* POPUP УСЛОВИЙ */}
       {isOpen && (

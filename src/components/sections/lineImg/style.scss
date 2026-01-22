@@ -1,21 +1,84 @@
-.lineImg{
-    width: 100%;
-    height: auto;   
+/* style.scss */
 
-    background: url(../../../../public/img/lineImg.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 90px 0;
+.lineImg {
+  width: 100%;
 
-    &_text{
-font-weight: 500;
-font-size: 70px;
-line-height: 110%;
-text-transform: uppercase;
-text-align: center;
-color: #fff;
+  /* секция с фоном лучше не "height:auto", а через padding */
+  background: url(../../../../public/img/lineImg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-max-width: 1300px;
+  margin: 90px 0;
+  padding: 80px 0;
+
+  /* чтобы текст был читабельный на светлых участках */
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &_text {
+    font-weight: 500;
+    font-size: 70px;
+    line-height: 110%;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 12px;
+    text-wrap: balance;
+  }
+}
+
+/* ===== ADAPTIVE ===== */
+@media (max-width: 1024px) {
+  .lineImg {
+    margin: 70px 0;
+    padding: 60px 0;
+
+    &_text {
+      font-size: 44px;
+      max-width: 900px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .lineImg {
+    margin: 55px 0;
+    padding: 46px 0;
+
+    &_text {
+      font-size: 32px;
+      line-height: 1.15;
+      max-width: 720px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .lineImg {
+    margin: 40px 0;
+    padding: 34px 0;
+
+    &_text {
+      font-size: 22px;
+      line-height: 1.2;
+      max-width: 520px;
+    }
+  }
 }
