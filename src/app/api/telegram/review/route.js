@@ -17,9 +17,9 @@ export async function POST(req) {
     }
 
     const message =
-      `📝 Новый отзыв\n\n` +
-      `👤 Имя: ${cleanName}\n\n` +
-      `💬 Текст:\n${cleanText}`;
+      `Новый отзыв\n\n` +
+      `Имя: ${cleanName}\n\n` +
+      `Текст:\n${cleanText}`;
 
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
