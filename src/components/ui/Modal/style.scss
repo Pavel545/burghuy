@@ -156,3 +156,27 @@
     }
   }
 }
+
+
+.modal__close {
+    color: #fff;
+    cursor: pointer;
+    background: #00000096;
+    border: 1px solid #ffffff2e;
+    border-radius: 50%;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    font-size: 28px;
+    line-height: 1;
+    transition: all .2s;
+    display: grid;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 99;
+
+    &:hover {
+        background: var(--color-1);
+    }
+}

@@ -16,7 +16,14 @@ export default function Modal({ header, children, isActive, onClose }: { header?
   return (
     <div onClick={onClose} className={`modal ${isActive ? "modal_active" : ""}`}>
       <div className="modal_content" onClick={(e)=> e.stopPropagation()}>
-        {header && <div className="modal_header">{header}</div>}
+        {header && <div className="modal_header">{header}<button
+            className="modal__close"
+            type="button"
+            onClick={onClose}
+            aria-label="Закрыть"
+          >
+            ×
+          </button></div>}
         <div className="modal_body">{children}</div>{" "}
         <div className="modal_footer">
           <div className="modal_footer__contact">
