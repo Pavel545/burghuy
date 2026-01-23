@@ -64,6 +64,10 @@
 
             width: min-content;
             text-wrap: nowrap;
+            transition: color .25s ease;
+            &:hover {
+                color: var(--color-2);
+            }
         }
     }
 
