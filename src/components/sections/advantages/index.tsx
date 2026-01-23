@@ -4,7 +4,7 @@ import "./style.scss";
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -43,10 +43,11 @@ const advantages = [
 ];
 
 const slides = [
+  { src: "/img/adv/4.jpg", alt: "Интерьер 4" },
+
   { src: "/img/adv/1.jpg", alt: "Интерьер 1" },
   { src: "/img/adv/2.jpg", alt: "Интерьер 2" },
   { src: "/img/adv/3.jpg", alt: "Интерьер 3" },
-  { src: "/img/adv/4.jpg", alt: "Интерьер 4" },
   { src: "/img/adv/5.jpg", alt: "Интерьер 5" },
   { src: "/img/adv/6.jpg", alt: "Интерьер 6" },
   { src: "/img/adv/7.jpg", alt: "Интерьер 7" },
@@ -82,12 +83,11 @@ export default function Advantages() {
 
         <div className="advantages__slider">
           <Swiper
-            modules={[Pagination, Autoplay]}
+            modules={[Pagination]}
             slidesPerView={1}
             loop
             speed={600}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
           >
             {slides.map((s) => (
               <SwiperSlide key={s.src}>
