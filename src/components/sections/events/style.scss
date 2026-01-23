@@ -1,5 +1,66 @@
-/* style.scss */
+/* style.scss (optimized + tablet) */
 
+:root {
+  --ev-border: rgba(255, 255, 255, 0.14);
+  --ev-border-soft: rgba(255, 255, 255, 0.1);
+  --ev-bg-glass: rgba(0, 0, 0, 0.2);
+  --ev-bg-dim: rgba(0, 0, 0, 0.72);
+  --ev-panel: rgba(18, 18, 18, 0.92);
+  --ev-panel-solid: #1b1b1b;
+  --ev-head: #2a2a2a;
+  --ev-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* ===== helpers (scss mixins) ===== */
+@mixin gold-text {
+  background: var(--text-gold);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@mixin glass-border($alpha: 0.14) {
+  border: 1px solid rgba(255, 255, 255, $alpha);
+}
+
+@mixin close-btn($size: 40px, $radius: 12px) {
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+
+  @include glass-border(0.14);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: scale(1.03);
+  }
+}
+
+@mixin scrollbars {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ===== EVENTS ===== */
 .events {
   /* ===== GRID ===== */
   &_grid {
@@ -13,17 +74,22 @@
       "a a b b c c"
       "d d d e e e";
 
-    /* базовая высота карточек */
     grid-auto-rows: 400px;
   }
+
+  .area-a { grid-area: a; }
+  .area-b { grid-area: b; }
+  .area-c { grid-area: c; }
+  .area-d { grid-area: d; }
+  .area-e { grid-area: e; }
 
   &_card {
     position: relative;
     border-radius: 6px;
     overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(0, 0, 0, 0.2);
+    @include glass-border(0.16);
+    background: var(--ev-bg-glass);
 
     transition: transform 0.25s ease, border-color 0.25s ease;
     cursor: pointer;
@@ -34,12 +100,9 @@
     }
   }
 
-  /* У тебя в JSX "link", а в SCSS было _conditions — добавил поддержку обоих */
+  /* link/conditions */
   &_conditions {
-    background: var(--text-gold);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+    @include gold-text;
 
     letter-spacing: 0.2px;
     font-size: 16px;
@@ -48,25 +111,6 @@
     cursor: pointer;
     position: relative;
     display: inline-block;
-
-    
-
-  }
-
-  .area-a {
-    grid-area: a;
-  }
-  .area-b {
-    grid-area: b;
-  }
-  .area-c {
-    grid-area: c;
-  }
-  .area-d {
-    grid-area: d;
-  }
-  .area-e {
-    grid-area: e;
   }
 
   &_media {
@@ -78,14 +122,12 @@
       height: 100%;
       object-fit: cover;
 
-      /* ОБЕСЦВЕЧЕНО + ЧУТЬ ТЕМНЕЕ */
       filter: grayscale(1) saturate(0.2) brightness(0.75) contrast(1.05);
       transition: filter 0.35s ease, transform 0.35s ease;
       transform: scale(1.02);
     }
   }
 
-  /* На hover возвращаем цвет */
   &_card:hover &_media img {
     filter: none;
     transform: scale(1.03);
@@ -113,7 +155,6 @@
     justify-content: flex-end;
     gap: 12px;
 
-    /* чтобы клики шли по карточке, а не по тексту */
     pointer-events: none;
   }
 
@@ -129,13 +170,10 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 110%;
-    background: var(--text-gold);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+    @include gold-text;
   }
 
-  /* ===== MODAL (если где-то используешь эти классы) ===== */
+  /* ===== MODAL (generic) ===== */
   &_modal {
     position: fixed;
     inset: 0;
@@ -147,7 +185,7 @@
 
     padding: 18px;
 
-    background: rgba(0, 0, 0, 0.72);
+    background: var(--ev-bg-dim);
     backdrop-filter: blur(6px);
   }
 
@@ -159,9 +197,9 @@
     border-radius: 18px;
     overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(18, 18, 18, 0.92);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+    @include glass-border(0.14);
+    background: var(--ev-panel);
+    box-shadow: var(--ev-shadow);
   }
 
   &_modal__close {
@@ -170,28 +208,7 @@
     right: 12px;
     z-index: 2;
 
-    width: 40px;
-    height: 40px;
-
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(0, 0, 0, 0.35);
-
-    color: #fff;
-    font-size: 26px;
-    line-height: 1;
-
-    display: grid;
-    place-items: center;
-
-    cursor: pointer;
-    transition: 0.2s ease;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.55);
-      border-color: rgba(255, 255, 255, 0.22);
-      transform: scale(1.03);
-    }
+    @include close-btn(40px, 12px);
   }
 
   &_modal__img {
@@ -203,89 +220,6 @@
       display: block;
       border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
-/* ============ TABLET (до 1024px) ============ */
-@media (max-width: 1024px) {
-  .events {
-    &_grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-areas:
-        "a b"
-        "c d"
-        "e e";
-
-      grid-auto-rows: 280px;
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    &_title {
-      font-size: 22px;
-    }
-
-    &_btn {
-      font-size: 16px;
-    }
-  }
-}
-
-/* ============ MOBILE (до 420px / 375x667) ============ */
-@media (max-width: 420px) {
-  .events {
-    padding: 55px 0;
-
-    .h2 {
-      margin-left: 0;
-      padding: 8px 16px;
-      font-size: 16px;
-      border-radius: 28px;
-    }
-
-    &_grid {
-      margin-top: 18px;
-
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "a"
-        "b"
-        "c"
-        "d"
-        "e";
-
-      grid-auto-rows: 220px;
-      gap: 14px;
-    }
-
-    &_info {
-      padding: 14px;
-      gap: 10px;
-    }
-
-    &_title {
-      font-size: 18px;
-      letter-spacing: 0.4px;
-    }
-
-    &_btn {
-      font-size: 15px;
-    }
-
-    /* На мобилке hover нет — оставим не “в ноль” серым, чтобы было живее */
-    &_media img {
-      filter: grayscale(0.7) saturate(0.35) brightness(0.8) contrast(1.05);
-      transform: scale(1.02);
-    }
-
-    &_modal {
-      padding: 12px;
-    }
-
-    &_modal__panel {
-      max-height: 90vh;
-      border-radius: 16px;
     }
   }
 }
@@ -313,11 +247,10 @@
   border-radius: 8px;
   overflow: hidden;
 
-  background: #1b1b1b;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  background: var(--ev-panel-solid);
+  @include glass-border(0.12);
+  box-shadow: var(--ev-shadow);
 
-  /* важно для корректного скролла внутри */
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -326,7 +259,7 @@
 .eventsPop__head {
   position: relative;
   padding: 18px 56px 18px 22px;
-  background: #2a2a2a;
+  background: var(--ev-head);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -338,16 +271,11 @@
   text-transform: uppercase;
   line-height: 1.15;
 
-  background: var(--text-gold);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+  @include gold-text;
 
-  /* чтобы заголовок не залезал под логотип */
   padding-right: 120px;
 }
 
-/* ЛОГОТИП: не хватало position */
 .eventsPop__logo {
   position: absolute;
   right: 60px;
@@ -371,31 +299,9 @@
   right: 14px;
   top: 12px;
 
-  width: 38px;
-  height: 38px;
-
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.35);
-
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-
-  display: grid;
-  place-items: center;
-
-  transition: 0.2s ease;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.55);
-    border-color: rgba(255, 255, 255, 0.22);
-    transform: scale(1.03);
-  }
+  @include close-btn(38px, 50%);
 }
 
-/* тело — делаем реально адаптивным по высоте панели */
 .eventsPop__body {
   padding: 18px 22px;
 
@@ -404,17 +310,7 @@
   overflow: auto;
   overscroll-behavior: contain;
 
-  /* скролл */
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.06);
-  }
+  @include scrollbars;
 }
 
 .eventsPop__row {
@@ -438,9 +334,7 @@
   padding-top: 2px;
 }
 
-.eventsPop__content {
-  min-width: 0;
-}
+.eventsPop__content { min-width: 0; }
 
 .eventsPop__rowTitle {
   font-size: 18px;
@@ -458,7 +352,7 @@
 
 .eventsPop__foot {
   padding: 16px 22px;
-  background: #2a2a2a;
+  background: var(--ev-head);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   display: grid;
@@ -493,68 +387,9 @@
   letter-spacing: 0.2px;
   text-decoration: none;
 
-  background: var(--text-gold);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+  @include gold-text;
 
-  &:hover {
-           opacity: 0.5;
-
-  }
-}
-
-/* ===== responsive conditions popup ===== */
-@media (max-width: 768px) {
-  .eventsPop__head {
-    padding: 14px 52px 14px 14px;
-  }
-
-  .eventsPop__title {
-    font-size: 18px;
-    padding-right: 0; /* на маленьких лучше не резервировать под логотип */
-  }
-
-  /* логотип убираем/уменьшаем, чтобы не ломал шапку */
-  .eventsPop__logo {
-    display: none;
-  }
-
-  .eventsPop__foot {
-    grid-template-columns: 1fr;
-  }
-
-  .eventsPop__phone {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 420px) {
-  .eventsPop {
-    padding: 12px;
-  }
-
-  .eventsPop__body {
-    padding: 12px 14px;
-  }
-
-  .eventsPop__row {
-    grid-template-columns: 28px 1fr;
-    gap: 10px;
-    padding: 14px 0;
-  }
-
-  .eventsPop__rowTitle {
-    font-size: 16px;
-  }
-
-  .eventsPop__rowText {
-    font-size: 13px;
-  }
-
-  .eventsPop__phone {
-    font-size: 18px;
-  }
+  &:hover { opacity: 0.5; }
 }
 
 /* ===== EVENT POPUP (контент модалки события) ===== */
@@ -585,7 +420,6 @@
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 
-  /* вместо padding-bottom — пагинация поверх (не съедает высоту на мобилке) */
   .swiper-pagination {
     bottom: 10px !important;
   }
@@ -594,7 +428,6 @@
     opacity: 0.35;
     transform: scale(0.95);
   }
-
   .swiper-pagination-bullet-active {
     opacity: 1;
     transform: scale(1.05);
@@ -607,24 +440,22 @@
     border-radius: 12px;
 
     background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    @include glass-border(0.14);
     backdrop-filter: blur(6px);
 
     top: 50%;
     transform: translateY(-50%);
     transition: 0.2s ease;
-  }
 
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
-    background: rgba(0, 0, 0, 0.55);
-    border-color: rgba(255, 255, 255, 0.22);
-  }
+    &:hover {
+      background: rgba(0, 0, 0, 0.55);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
 
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
-    font-size: 16px;
-    font-weight: 900;
+    &::after {
+      font-size: 16px;
+      font-weight: 900;
+    }
   }
 }
 
@@ -633,31 +464,181 @@
   width: 100%;
   height: 100%;
 
-  img {
-    object-fit: cover;
-  }
+  img { object-fit: cover; }
 }
 
-@media (max-width: 1024px) {
+/* ================== TABLET (768px – 1024px) ==================
+   отдельный адаптив именно под планшеты (iPad / landscape/portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .events {
+    &_grid {
+      margin-top: 28px;
+      gap: 14px;
+
+      /* более “планшетный” расклад: 3 колонки, без излишней высоты */
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "a a b"
+        "c d e";
+
+      grid-auto-rows: 300px;
+    }
+
+    &_info { padding: 16px; gap: 10px; }
+
+    &_title { font-size: 22px; }
+    &_btn { font-size: 16px; }
+
+    &_modal {
+      padding: 16px;
+    }
+
+    &_modal__panel {
+      width: min(940px, 100%);
+      max-height: 88vh;
+      border-radius: 16px;
+    }
+  }
+
+  .eventsPop {
+    padding: 16px;
+  }
+
+  .eventsPop__panel {
+    width: min(980px, 100%);
+    max-height: 88vh;
+  }
+
+  .eventsPop__head {
+    padding: 16px 54px 16px 18px;
+  }
+
+  .eventsPop__title {
+    font-size: 20px;
+    padding-right: 92px; /* на планшете логотип меньше */
+  }
+
+  .eventsPop__logo {
+    right: 54px;
+    top: 12px;
+    width: 84px;
+    height: 46px;
+  }
+
+  .eventsPop__body { padding: 16px 18px; }
+
+  .eventsPop__row {
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .eventsPop__rowTitle { font-size: 16px; }
+  .eventsPop__rowText { font-size: 13.5px; }
+
+  .eventsPop__foot {
+    gap: 14px;
+  }
+
+  .eventsPop__phone { font-size: 20px; }
+
   .eventPop__swiper {
     height: 320px;
   }
 
   .eventPop {
-    &_title {
-      font-size: 24px;
-    }
-    &_count {
-      font-size: 16px;
-    }
+    &_title { font-size: 24px; }
+    &_count { font-size: 16px; }
   }
 }
 
+/* ============ TABLET (до 1024px) — оставил твой блок,
+   но он теперь больше про “всё до 1024”. Можно удалить,
+   если тебе достаточно точного планшетного диапазона выше.
+=========== */
+@media (max-width: 1024px) {
+  .events {
+    &_title { font-size: 22px; }
+    &_btn { font-size: 16px; }
+  }
+}
+
+/* ============ MOBILE (до 420px / 375x667) ============ */
+@media (max-width: 420px) {
+  .events {
+    padding: 55px 0;
+
+    .h2 {
+      margin-left: 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 28px;
+    }
+
+    &_grid {
+      margin-top: 18px;
+
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "d"
+        "e";
+
+      grid-auto-rows: 220px;
+      gap: 14px;
+    }
+
+    &_info { padding: 14px; gap: 10px; }
+
+    &_title { font-size: 18px; letter-spacing: 0.4px; }
+    &_btn { font-size: 15px; }
+
+    &_media img {
+      filter: grayscale(0.7) saturate(0.35) brightness(0.8) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    &_modal { padding: 12px; }
+    &_modal__panel { max-height: 90vh; border-radius: 16px; }
+  }
+
+  .eventsPop { padding: 12px; }
+
+  .eventsPop__body { padding: 12px 14px; }
+
+  .eventsPop__row {
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .eventsPop__rowTitle { font-size: 16px; }
+  .eventsPop__rowText { font-size: 13px; }
+
+  .eventsPop__phone { font-size: 18px; }
+}
+
+/* ===== responsive conditions popup (до 768px) ===== */
 @media (max-width: 768px) {
+  .eventsPop__head { padding: 14px 52px 14px 14px; }
+
+  .eventsPop__title {
+    font-size: 18px;
+    padding-right: 0;
+  }
+
+  .eventsPop__logo { display: none; }
+
+  .eventsPop__foot { grid-template-columns: 1fr; }
+
+  .eventsPop__phone { font-size: 20px; }
+
   .eventPop__swiper {
     height: 260px;
 
-    /* на тач-устройствах стрелки часто мешают */
     .swiper-button-prev,
     .swiper-button-next {
       display: none;
@@ -665,24 +646,7 @@
   }
 
   .eventPop {
-    &_title {
-      font-size: 20px;
-    }
-    &_count {
-      font-size: 15px;
-    }
-  }
-}
-
-@media (max-width: 420px) {
-  .eventPop__swiper {
-    height: 220px;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .eventPop {
-    &_title {
-      font-size: 18px;
-    }
+    &_title { font-size: 20px; }
+    &_count { font-size: 15px; }
   }
 }

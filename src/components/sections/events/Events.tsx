@@ -186,7 +186,7 @@ export default function Events() {
             </article>
           ))}
         </div>
-        <div className="flex  items-center mt-12 gap-20">
+        <div className="flex  items-center mt-12 gap-15">
           <a href="https://t.me/Burzyi_bot" className="butT1">Выбрать мероприятие</a>
 
           <p

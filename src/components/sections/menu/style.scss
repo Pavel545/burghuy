@@ -1,12 +1,80 @@
+/* menu.scss (optimized + tablet) */
+
+:root {
+  --m-gap: 30px;
+
+  --m-card-bg: #191919;
+  --m-head-bg: rgba(255, 255, 255, 0.06);
+  --m-border: rgba(255, 255, 255, 0.08);
+
+  --m-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  --m-backdrop: rgba(0, 0, 0, 0.65);
+
+  --m-text-dim: rgba(255, 255, 255, 0.75);
+}
+
+/* ===== helpers ===== */
+@mixin gold-text {
+  background: linear-gradient(90deg, #f7e579 0%, #df9339 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin close-btn($size: 38px) {
+  width: $size;
+  height: $size;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  color: #fff;
+
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  font-size: 26px;
+  line-height: 1;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+@mixin scrollbars-thin {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.35) transparent; /* Firefox */
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    transition: background-color 0.25s ease;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.55);
+  }
+}
+
 .menu {
   .menu_content {
     display: grid;
     grid-template-columns: 1.55fr 1fr 1fr;
     grid-template-rows: 320px 320px;
-    gap: 30px;
+    gap: var(--m-gap);
     padding: 60px 0;
   }
 
+  /* ===== TILE ===== */
   .tile {
     position: relative;
     border: 0;
@@ -15,10 +83,12 @@
     background: transparent;
     overflow: hidden;
 
-    // чтобы кнопка выглядела как карточка
     display: block;
     text-align: left;
     outline: none;
+
+    /* если где-то не задан радиус — пусть будет единый */
+    border-radius: 12px;
 
     &:focus-visible {
       box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.65);
@@ -29,6 +99,8 @@
       inset: 0;
 
       img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         transform: scale(1.02);
         transition: transform 350ms ease;
@@ -54,15 +126,18 @@
       text-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
     }
 
-    // затемнение как на превью
+    /* затемнение */
     &::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0.0) 40%,
-          rgba(0, 0, 0, 0.55) 100%);
       z-index: 1;
+
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 40%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
     }
   }
 
@@ -75,13 +150,15 @@
     min-height: 0;
   }
 
-  /* ====== MODAL ====== */
+  /* ===== MODAL ===== */
   .menu_modal {
     position: fixed;
     inset: 0;
     z-index: 999;
+
     display: grid;
     place-items: center;
+
     padding: 16px;
   }
 
@@ -89,38 +166,47 @@
     position: absolute;
     inset: 0;
     border: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: var(--m-backdrop);
     cursor: pointer;
   }
 
   .menu_modal_card {
     position: relative;
     z-index: 2;
+
     width: min(980px, 100%);
     border-radius: 12px;
-    background: #191919;
+
+    background: var(--m-card-bg);
     color: #fff;
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
-    // overflow: hidden;
+
+    box-shadow: var(--m-shadow);
+
+    /* важно: чтобы body нормально скроллился внутри */
+    display: flex;
+    flex-direction: column;
+    max-height: min(86vh, 900px);
+    min-height: 0;
   }
 
   .menu_modal_head {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    border-radius: 12px 12px 0 0;
+
     padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.06);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--m-head-bg);
+
+    border-bottom: 1px solid var(--m-border);
+    border-radius: 12px 12px 0 0;
   }
 
   .menu_modal_title {
+    @include gold-text;
 
-    background: linear-gradient(90deg, #F7E579 0%, #DF9339 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     font-weight: 800;
     font-size: 30px;
     letter-spacing: 0.2px;
@@ -128,47 +214,40 @@
   }
 
   .menu_modal_close {
-color: #fff;
-    cursor: pointer;
-    background: #00000059;
-    border: 1px solid #ffffff24;
-    border-radius: 50%;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    font-size: 26px;
-    line-height: 1;
-    transition: all .2s;
-    display: grid;
     position: absolute;
     top: 12px;
     right: 14px;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
+    @include close-btn(38px);
   }
 
   .menu_modal_body {
+    flex: 1;
+    min-height: 0;
+
     max-height: min(70vh, 640px);
     overflow: auto;
+
+    @include scrollbars-thin;
   }
 
-  /* ====== TABLE ====== */
+  /* ===== TABLE ===== */
   .menu_table {
     padding: 8px 0 10px;
-
-
   }
 
-  .menu_table_head {
+  .menu_table_head,
+  .menu_table_row {
     display: grid;
     grid-template-columns: 1fr 110px 110px;
     gap: 12px;
 
     padding: 12px 18px;
+  }
+
+  .menu_table_head {
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--m-text-dim);
   }
 
   .menu_table_rows {
@@ -177,11 +256,6 @@ color: #fff;
   }
 
   .menu_table_row {
-    display: grid;
-    grid-template-columns: 1fr 110px 110px;
-    gap: 12px;
-
-    padding: 12px 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
 
     .col_out,
@@ -196,39 +270,53 @@ color: #fff;
       line-height: 1.25;
     }
   }
-
-  /* ====== SCROLLBAR (modal only) ====== */
-  .menu_modal_body {
-    scrollbar-width: thin;
-    /* Firefox */
-    scrollbar-color: #8b8b8b transparent;
-    /* Firefox */
-  }
-
-  /* Chrome / Edge / Safari */
-  .menu_modal_body::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .menu_modal_body::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .menu_modal_body::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.35);
-    border-radius: 6px;
-    transition: background-color 0.25s ease;
-  }
-
-  .menu_modal_body::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.55);
-  }
-
 }
 
 /* блокировка скролла под модалкой */
 .no-scroll {
   overflow: hidden;
+}
+
+/* ================== TABLET (768px – 1024px) ================== */
+@media  (max-width: 1024px) {
+  .menu {
+    .menu_content {
+      /* на планшете лучше 2 колонки, чтобы карточки не были узкие */
+      grid-template-columns: 1.2fr 1fr;
+      grid-template-rows: 280px 280px 280px;
+      gap: 18px;
+      padding: 40px 0;
+    }
+
+    .tile--big {
+      /* большая занимает всю первую строку */
+      grid-column: 1 / -1;
+      grid-row: auto;
+      height: auto;
+    }
+
+    .tile {
+      .tile_label {
+        font-size: 16px;
+        left: 16px;
+        bottom: 14px;
+      }
+    }
+
+    .menu_modal_card {
+      width: min(900px, 100%);
+      max-height: 88vh;
+    }
+
+    .menu_modal_title {
+      font-size: 22px;
+    }
+
+    .menu_table_head,
+    .menu_table_row {
+      grid-template-columns: 1fr 90px 90px;
+    }
+  }
 }
 
 /* ====== MENU mobile 375x667 ====== */
@@ -270,6 +358,10 @@ color: #fff;
     .menu_table_head,
     .menu_table_row {
       grid-template-columns: 1fr 60px 60px;
+    }
+
+    .menu_modal_title {
+      font-size: 18px;
     }
   }
 }
