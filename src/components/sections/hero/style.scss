@@ -51,6 +51,10 @@
         justify-self: center;
         position: relative;
         top: 50px;
+        transition: 300ms ease;
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 
     .tel {
@@ -957,10 +961,10 @@
     width: 100%;
   }
 }
-.swiper-wrapper {
+.hero .swiper-wrapper {
     z-index: 1;
     width: 400px;
 }
-.swiper-pagination-bullet-active {
+ .swiper-pagination-bullet-active {
     background: #eee;
 }

@@ -398,13 +398,13 @@ export default function Menu() {
           <div className="menu_modal_card">
             <div className="menu_modal_head">
               <div className="menu_modal_title">{activeCategory.title}</div>
-              <Image
+              {/* <Image
                 src={"/img/logo.png"}
                 alt={"Логотип Буржуй"}
                 width={109}
                 height={79}
                 priority
-              />
+              /> */}
               <button
                 type="button"
                 className="menu_modal_close"

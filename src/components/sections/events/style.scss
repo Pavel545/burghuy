@@ -35,8 +35,7 @@
   }
 
   /* У тебя в JSX "link", а в SCSS было _conditions — добавил поддержку обоих */
-  &_conditions,
-  .link {
+  &_conditions {
     background: var(--text-gold);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -50,20 +49,8 @@
     position: relative;
     display: inline-block;
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 2px;
-      background: var(--text-gold);
-      transition: 300ms ease;
-    }
+    
 
-    &:hover::after {
-      height: 5px;
-    }
   }
 
   .area-a {
@@ -512,7 +499,8 @@
   background-clip: text;
 
   &:hover {
-    opacity: 0.9;
+           opacity: 0.5;
+
   }
 }
 

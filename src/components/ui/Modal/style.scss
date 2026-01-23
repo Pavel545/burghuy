@@ -107,9 +107,10 @@
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
-
+      transition: 300ms ease;
       &:hover {
-        opacity: 0.9;
+        transform: scale(0.91);
+        opacity: 0.5;
       }
     }
   }
