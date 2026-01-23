@@ -9,40 +9,26 @@ export async function POST(req) {
       return Response.json({ error: "name/text required" }, { status: 400 });
     }
 
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const botUrl = process.env.REVIEWS_BOT_URL || "http://127.0.0.1:8081/review";
+    const token = process.env.REVIEWS_API_TOKEN; // если добавишь защиту
 
-    if (!token || !chatId) {
-      return Response.json({ error: "Server is not configured" }, { status: 500 });
-    }
-
-    const message =
-      `Новый отзыв\n\n` +
-      `Имя: ${cleanName}\n\n` +
-      `Текст:\n${cleanText}`;
-
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(botUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify({ name: cleanName, text: cleanText }),
     });
 
-    const tgData = await tgRes.json().catch(() => ({}));
+    const data = await res.json().catch(() => ({}));
 
-    if (!tgRes.ok || tgData?.ok === false) {
-      return Response.json(
-        { error: tgData?.description || "Telegram error" },
-        { status: 502 }
-      );
+    if (!res.ok) {
+      return Response.json({ error: data?.error || "Bot endpoint error" }, { status: 502 });
     }
 
     return Response.json({ ok: true });
-  } catch (e) {
+  } catch {
     return Response.json({ error: "Bad request" }, { status: 400 });
   }
 }
