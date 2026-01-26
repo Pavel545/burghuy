@@ -32,7 +32,7 @@ const halls: Hall[] = [
     features: ["Вместительность — 40 человек", "Свой вход", "Свой туалет", "Свой гардероб"],
     fitsTitle: "Подходит для:",
     fits: ["Свадеб", "Юбилеев", "Корпоративов"],
-    gallery: ["/img/halls/zal1/1.jpg", "/img/halls/zal1/2.jpg", "/img/halls/zal1/3.jpg", "/img/halls/zal1/4.jpg", "/img/halls/zal1/5.jpg", "/img/halls/zal1/6.jpg", "/img/halls/zal1/7.jpg"],
+    gallery: [ "/img/halls/zal1/2.jpg", "/img/halls/zal1/3.jpg", "/img/halls/zal1/4.jpg", "/img/halls/zal1/5.jpg", "/img/halls/zal1/6.jpg", "/img/halls/zal1/7.jpg"],
     bookHref: "https://t.me/Burzyi_bot",
   },
   {
