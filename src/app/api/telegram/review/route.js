@@ -1,28 +1,34 @@
 export async function POST(req) {
   try {
-    const { name, text } = await req.json();
+    const { name, text, phone } = await req.json();
 
     const cleanName = String(name || "").trim();
     const cleanText = String(text || "").trim();
+    const cleanPhone = String(phone || "").trim();
 
     if (!cleanName || !cleanText) {
       return Response.json({ error: "name/text required" }, { status: 400 });
     }
 
-    const botUrl = process.env.REVIEWS_BOT_URL || "http://127.0.0.1:8081/review";
-    const token = process.env.REVIEWS_API_TOKEN; // если добавишь защиту
+    // ❗️Сюда ставим публичный URL nginx, чтобы работало из браузера/сервера
+    const botUrl = process.env.REVIEWS_BOT_URL || "https://burzhui73.ru/review";
+    const token = process.env.REVIEWS_API_TOKEN;
 
     const res = await fetch(botUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+        ...(token ? { Authorization: Bearer ${token} } : {}),
       },
-      body: JSON.stringify({ name: cleanName, text: cleanText }),
+      body: JSON.stringify({
+        name: cleanName,
+        text: cleanText,
+        phone: cleanPhone,
+        page: req.headers.get("referer") || "", // или можно передать с клиента window.location.href
+      }),
     });
 
     const data = await res.json().catch(() => ({}));
-
     if (!res.ok) {
       return Response.json({ error: data?.error || "Bot endpoint error" }, { status: 502 });
     }
