@@ -22,7 +22,7 @@ const isApiErr = (v: unknown): v is ApiErr =>
   "error" in v &&
   typeof (v as any).error === "string";
 
-export const Reviews: React.FC = () => {
+ const Reviews: React.FC = () => {
   const slides = useMemo<Slide[]>(
     () => [
       {
@@ -250,3 +250,6 @@ export const Reviews: React.FC = () => {
     </section>
   );
 };
+
+
+export default Reviews;

@@ -1,4 +1,4 @@
-/* about.scss (optimized + tablet) */
+/* about.scss (исправленный) */
 
 :root {
   --about-gap: 41px;
@@ -35,16 +35,15 @@
     max-width: 600px;
   }
 
-  /* было: .butT3 внутри left */
   &_content_left .butT3 {
     margin-top: 100px;
   }
 
   &_content_slider {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
     padding: 10px 0;
   }
@@ -59,15 +58,17 @@
 /* ===== SWIPER ===== */
 .aboutSwiper {
   width: 100%;
-  overflow: visible; /* чтобы “подглядывание” работало */
-  padding: 10px 0 40px;
+  height: 600px;
+  overflow: hidden;
+  padding: 20px 0 50px;
 
   .swiper-wrapper {
     align-items: center;
+    transition-timing-function: ease-out; /* Плавное замедление */
   }
 
   .swiper-pagination {
-    bottom: 0 !important;
+    bottom: 20px !important;
   }
 
   .swiper-pagination-bullet {
@@ -83,31 +84,99 @@
     transform: scale(1.15);
   }
 
-  /* активный/соседи — держим рядом, чтобы читалось */
-  .swiper-slide-active {
-    opacity: 1;
-    filter: none;
-    transform: scale(1);
+  /* Стрелки */
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: var(--color-2);
+    // background: rgba(255, 255, 255, 0.3);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    
+    &:after {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      opacity: 1;
+      visibility: visible;
+      width: 36px;
+      height: 36px;
+      
+      &:after {
+        font-size: 16px;
+      }
+    }
   }
 
-  .swiper-slide-prev,
-  .swiper-slide-next {
-    opacity: 0.6;
-    filter: saturate(0.8) brightness(0.85);
-    transform: scale(0.96);
+  .swiper-button-next {
+    right: 10px;
+  }
+
+  .swiper-button-prev {
+    left: 10px;
+  }
+
+  /* Показываем стрелки при наведении на слайдер */
+  &:hover {
+    .swiper-button-next,
+    .swiper-button-prev {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 
 .aboutSlide {
-  width: 360px; /* slidesPerView=auto */
-  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
+  width: 100% !important;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   opacity: 0.35;
   filter: saturate(0.6) brightness(0.75);
   transform: scale(0.92);
+  will-change: transform, opacity; /* Улучшение производительности */
+  
+  &.swiper-slide-active {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+    z-index: 2;
+  }
+  
+  &.swiper-slide-prev,
+  &.swiper-slide-next {
+    opacity: 0.6;
+    filter: saturate(0.8) brightness(0.85);
+    transform: scale(0.96);
+    z-index: 1;
+  }
+  
+  /* Скрываем неактивные слайды во время драга */
+  .aboutSwiper.swiper-free-mode &,
+  .aboutSwiper.swiper-grab & {
+    &.swiper-slide-prev:not(.swiper-slide-active),
+    &.swiper-slide-next:not(.swiper-slide-active) {
+      opacity: 0.4;
+    }
+  }
 }
 
 .aboutSlideInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
   img {
     width: 100%;
@@ -117,20 +186,13 @@
   }
 }
 
-/* ===== FIX: вместо .swiper-horizontal max-height =====
-   лучше ограничивать конкретный блок слайдера/слайда, а не весь swiper globally
-*/
-.aboutSlideInner {
-  max-height: 700px;
-}
-
 /* ================== TABLET (768px – 1024px) ================== */
 @media (min-width: 768px) and (max-width: 1024px) {
   .about {
     &_content {
       gap: 22px;
       margin: 40px 0;
-      grid-template-columns: 1.1fr 0.9fr; /* чуть больше текста, меньше слайдер */
+      grid-template-columns: 1.1fr 0.9fr;
     }
 
     &_content_left {
@@ -140,7 +202,7 @@
     &_content_left_link {
       margin-top: 24px;
       gap: 16px;
-      align-items: stretch; /* на планшете кнопки обычно лучше ровнять */
+      align-items: stretch;
       flex-wrap: wrap;
     }
 
@@ -164,37 +226,48 @@
   }
 
   .aboutSwiper {
-    padding: 8px 0 34px;
-  }
-
-  .aboutSlide {
-    width: 300px;
-  }
-
-  .aboutSlideInner {
-    /* чтобы на iPad по высоте не раздувалось */
-    height: 420px;
+    height: 500px;
+    padding: 15px 0 40px;
   }
 }
 
-/* ============ <= 1024 (если хочешь оставить мягкое снижение ширины слайдов) ============ */
-@media (max-width: 1024px) {
-  .aboutSlide {
-    width: 300px;
-  }
-}
-
-/* ============ <= 640 ============ */
-@media (max-width: 640px) {
-  .aboutSlide {
-    width: 260px;
-  }
-  .about_content{
+/* ============ <= 768 (таблетка и меньше) ============ */
+@media (max-width: 768px) {
+  .about_content {
     grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .aboutSwiper {
+    height: 450px;
+    padding: 10px 0 40px;
+  }
+  
+  /* Стрелки на мобилках всегда видны и меньше */
+  .aboutSwiper {
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 32px;
+      height: 32px;
+      opacity: 1;
+      visibility: visible;
+      
+      &:after {
+        font-size: 14px;
+      }
+    }
+    
+    .swiper-button-next {
+      right: 5px;
+    }
+    
+    .swiper-button-prev {
+      left: 5px;
+    }
   }
 }
 
-/* ====== ABOUT mobile 375x667 ====== */
+/* ====== MOBILE 420px и меньше ====== */
 @media (max-width: 420px) {
   .about {
     padding: 55px 0;
@@ -252,19 +325,21 @@
   }
 
   .aboutSwiper {
-    padding: 6px 0 34px;
+    height: 350px;
+    padding: 5px 0 35px;
 
     .swiper-pagination {
-      bottom: 0 !important;
+      bottom: 15px !important;
     }
-  }
-
-  .aboutSlide {
-    width: 270px;
-  }
-
-  .aboutSlideInner {
-    height: 320px;
-    img { height: 100%; }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 28px;
+      height: 28px;
+      
+      &:after {
+        font-size: 12px;
+      }
+    }
   }
 }

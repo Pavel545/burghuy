@@ -1,16 +1,19 @@
-import About from "@/components/sections/about/About";
-import Advantages from "@/components/sections/advantages";
-import Contact from "@/components/sections/contact";
-import Events from "@/components/sections/events/Events";
+import dynamic from 'next/dynamic';
 import Hero from "@/components/sections/hero/Hero";
-import LineImg from "@/components/sections/lineImg";
-import Menu from "@/components/sections/menu/Menu";
-import { Reviews } from "@/components/sections/reviews/reviews";
-import Footer from "@/components/shared/footer";
+
+// Ленивая загрузка всех компонентов кроме Hero
+const Events = dynamic(() => import("@/components/sections/events/Events"));
+const About = dynamic(() => import("@/components/sections/about/About"));
+const LineImg = dynamic(() => import("@/components/sections/lineImg"));
+const Advantages = dynamic(() => import("@/components/sections/advantages"));
+const Menu = dynamic(() => import("@/components/sections/menu/Menu"));
+const Reviews = dynamic(() => import("@/components/sections/reviews/reviews"));
+const Contact = dynamic(() => import("@/components/sections/contact"));
+const Footer = dynamic(() => import("@/components/shared/footer"));
 
 export default function Home() {
   return (
-   <main>
+    <main>
       <Hero/>
       <Events/>
       <About/>
@@ -20,6 +23,6 @@ export default function Home() {
       <Reviews/>
       <Contact/>
       <Footer/>
-   </main>
+    </main>
   );
 }
