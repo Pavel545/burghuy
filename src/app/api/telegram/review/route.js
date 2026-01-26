@@ -16,10 +16,10 @@ export async function POST(req) {
 
     const res = await fetch(botUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: Bearer ${token} } : {}),
-      },
+  headers: {
+    "Content-Type": "application/json",
+    ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+},
       body: JSON.stringify({
         name: cleanName,
         text: cleanText,
